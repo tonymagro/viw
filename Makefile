@@ -2,7 +2,7 @@ CC=gcc
 BIN=viw
 BIN_TEST=viw_test
 DEBUG=1
-CVERSION=c11
+CVERSION=gnu99
 
 UNAME=$(shell uname)
 ifeq ($(findstring MINGW, $(UNAME)), MINGW)
@@ -13,8 +13,8 @@ ifeq ($(findstring Darwin, $(UNAME)), Darwin)
 	PLATFORM=DARWIN
 endif
 
-INCLUDE= -I./include
-CFLAGS= -MMD -std=${CVERSION} -Wall -Werror -DPLATFORM_$(PLATFORM)
+INCLUDE= -I./include -I./src/proto
+CFLAGS= -MMD -std=${CVERSION} -DPLATFORM_$(PLATFORM)
 
 ifneq ($(DEBUG), 0)
 	CFLAGS+= -g -O0 -DDEBUG
@@ -24,11 +24,12 @@ ifeq ($(PLATFORM), WINDOWS)
 	BIN:=$(BIN).exe
 	BIN_TEST:=$(BIN_TEST).exe
 	ifneq ($(WIN_CONSOLE), 0)
-		LIBS= -lgdi32 -lwinmm -limm32 -lversion -loleaut32 -lOle32 -luuid
+		LIBS= -lkernel32 -luser32 -lgdi32 -ladvapi32 -lcomdlg32 -lcomctl32 -lversion -lOle32 -luuid
+		#-lgdi32 -lwinmm -limm32 -lversion -loleaut32 -lOle32 -luuid
 	else
 		LIBS= -mwindows
 	endif
-	CFLAGS+= $(INCLUDE) -DFEAT_GUI_W32 -DFEAT_CLIPBOARD
+	CFLAGS+= $(INCLUDE) -DFEAT_GUI_W32 -DFEAT_CLIPBOARD -DWIN32
 	LDFLAGS= -lmingw32 $(LIBS)
 endif
 
@@ -77,7 +78,6 @@ CFILES=\
 	os_win32.c\
 	os_mswin.c\
 	winclip.c\
-	pathdef.c\
 	popupmnu.c\
 	quickfix.c\
 	regexp.c\
@@ -91,11 +91,14 @@ CFILES=\
 	ui.c\
 	undo.c\
 	version.c\
-	vimrc.c\
 	window.c\
 
+EFILES=\
+	pathdef.c\
+	vimrc.c\
 
-CFILES += GUIFILES
+
+CFILES += $(GUIFILES)
 OFILES=$(addprefix obj/, $(notdir $(CFILES:.c=.o)))
 DFILES=$(OFILES:.o=.d)
 

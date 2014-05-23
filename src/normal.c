@@ -7554,7 +7554,8 @@ cmdarg_T	*cap;
 	 */
 	case '*':
 	case '#':
-#if POUND != '#'case POUND:		/* pound sign (sometimes equal to '#') */
+#if POUND != '#'
+	case POUND:		/* pound sign (sometimes equal to '#') */
 #endif
 	case Ctrl_RSB:		/* :tag or :tselect for current identifier */
 	case ']':			/* :tselect for current identifier */
