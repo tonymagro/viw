@@ -1,7 +1,7 @@
 CC=gcc
 BIN=viw
 BIN_TEST=viw_test
-DEBUG=1
+DEBUG=0
 CVERSION=gnu99
 
 UNAME=$(shell uname)
