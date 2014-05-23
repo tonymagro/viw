@@ -103,7 +103,7 @@ typedef long off_t;
 #ifdef _DEBUG
 
 # if defined(_MSC_VER)	&&  (_MSC_VER >= 1000)
-   /* Use the new debugging tools in Visual C++ 4.x */
+/* Use the new debugging tools in Visual C++ 4.x */
 #  include <crtdbg.h>
 #  define ASSERT(f) _ASSERT(f)
 # else
@@ -123,7 +123,7 @@ Trace(char *pszFormat, ...);
 
 #else /* !_DEBUG */
 
-  /* These macros should all compile away to nothing */
+/* These macros should all compile away to nothing */
 # define ASSERT(f)		((void)0)
 # define TRACE			1 ? (void)0 : printf
 # define TRACE0(sz)

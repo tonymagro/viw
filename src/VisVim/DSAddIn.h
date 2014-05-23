@@ -8,7 +8,7 @@
 
 // {4F9E01C0-406B-11d2-8006-00001C405077}
 DEFINE_GUID (CLSID_DSAddIn,
-	0x4f9e01c0, 0x406b, 0x11d2, 0x80, 0x6, 0x0, 0x0, 0x1c, 0x40, 0x50, 0x77);
+			 0x4f9e01c0, 0x406b, 0x11d2, 0x80, 0x6, 0x0, 0x0, 0x1c, 0x40, 0x50, 0x77);
 
 /////////////////////////////////////////////////////////////////////////////
 // CDSAddIn
@@ -17,12 +17,12 @@ class CDSAddIn :
 	public   IDSAddIn,
 	public   CComObjectRoot,
 	public   CComCoClass < CDSAddIn,
-		 &CLSID_DSAddIn >
+	&CLSID_DSAddIn >
 {
-    public:
+public:
 	DECLARE_REGISTRY (CDSAddIn, "VisVim.DSAddIn.1",
-			  "VisVim Developer Studio Add-in", IDS_VISVIM_LONGNAME,
-			  THREADFLAGS_BOTH)
+					  "VisVim Developer Studio Add-in", IDS_VISVIM_LONGNAME,
+					  THREADFLAGS_BOTH)
 
 	CDSAddIn ()
 	{
@@ -34,16 +34,16 @@ class CDSAddIn :
 	DECLARE_NOT_AGGREGATABLE (CDSAddIn)
 
 	// IDSAddIns
-    public:
+public:
 	STDMETHOD (OnConnection) (THIS_ IApplication * pApp, VARIANT_BOOL bFirstTime,
-				  long dwCookie, VARIANT_BOOL * OnConnection);
+							  long dwCookie, VARIANT_BOOL * OnConnection);
 	STDMETHOD (OnDisconnection) (THIS_ VARIANT_BOOL bLastTime);
 
-    protected:
+protected:
 	bool AddCommand (IApplication* pApp, char* MethodName, char* CmdName,
-			 UINT StrResId, UINT GlyphIndex, VARIANT_BOOL bFirstTime);
+					 UINT StrResId, UINT GlyphIndex, VARIANT_BOOL bFirstTime);
 
-    protected:
+protected:
 	CCommandsObj * m_pCommands;
 	DWORD m_dwCookie;
 };

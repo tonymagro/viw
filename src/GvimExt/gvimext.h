@@ -108,66 +108,66 @@ typedef CShellExtClassFactory *LPCSHELLEXTCLASSFACTORY;
 
 // this is the actual OLE Shell context menu handler
 class CShellExt : public IContextMenu,
-			 IShellExtInit
+	IShellExtInit
 {
 protected:
-    ULONG	 m_cRef;
-    LPDATAOBJECT m_pDataObj;
-    UINT	 m_edit_existing_off;
+	ULONG	 m_cRef;
+	LPDATAOBJECT m_pDataObj;
+	UINT	 m_edit_existing_off;
 
-    // For some reason, this callback must be static
-    static BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam);
+	// For some reason, this callback must be static
+	static BOOL CALLBACK EnumWindowsProc(HWND hWnd, LPARAM lParam);
 
-    STDMETHODIMP PushToWindow(HWND hParent,
-	    LPCSTR pszWorkingDir,
-	    LPCSTR pszCmd,
-	    LPCSTR pszParam,
-	    int iShowCmd,
-	    int idHWnd);
+	STDMETHODIMP PushToWindow(HWND hParent,
+							  LPCSTR pszWorkingDir,
+							  LPCSTR pszCmd,
+							  LPCSTR pszParam,
+							  int iShowCmd,
+							  int idHWnd);
 
-    STDMETHODIMP InvokeGvim(HWND hParent,
-	    LPCSTR pszWorkingDir,
-	    LPCSTR pszCmd,
-	    LPCSTR pszParam,
-	    int iShowCmd);
+	STDMETHODIMP InvokeGvim(HWND hParent,
+							LPCSTR pszWorkingDir,
+							LPCSTR pszCmd,
+							LPCSTR pszParam,
+							int iShowCmd);
 
-    STDMETHODIMP InvokeSingleGvim(HWND hParent,
-	    LPCSTR pszWorkingDir,
-	    LPCSTR pszCmd,
-	    LPCSTR pszParam,
-	    int iShowCmd,
-	    int useDiff);
+	STDMETHODIMP InvokeSingleGvim(HWND hParent,
+								  LPCSTR pszWorkingDir,
+								  LPCSTR pszCmd,
+								  LPCSTR pszParam,
+								  int iShowCmd,
+								  int useDiff);
 
 public:
-    int		 m_cntOfHWnd;
-    HWND	 m_hWnd[MAX_HWND];
-    CShellExt();
-    ~CShellExt();
+	int		 m_cntOfHWnd;
+	HWND	 m_hWnd[MAX_HWND];
+	CShellExt();
+	~CShellExt();
 
-    //IUnknown members
-    STDMETHODIMP QueryInterface(REFIID, LPVOID FAR *);
-    STDMETHODIMP_(ULONG) AddRef();
-    STDMETHODIMP_(ULONG) Release();
+	//IUnknown members
+	STDMETHODIMP QueryInterface(REFIID, LPVOID FAR *);
+	STDMETHODIMP_(ULONG) AddRef();
+	STDMETHODIMP_(ULONG) Release();
 
-    //IShell members
-    STDMETHODIMP QueryContextMenu(HMENU hMenu,
-	    UINT indexMenu,
-	    UINT idCmdFirst,
-	    UINT idCmdLast,
-	    UINT uFlags);
+	//IShell members
+	STDMETHODIMP QueryContextMenu(HMENU hMenu,
+								  UINT indexMenu,
+								  UINT idCmdFirst,
+								  UINT idCmdLast,
+								  UINT uFlags);
 
-    STDMETHODIMP InvokeCommand(LPCMINVOKECOMMANDINFO lpcmi);
+	STDMETHODIMP InvokeCommand(LPCMINVOKECOMMANDINFO lpcmi);
 
-    STDMETHODIMP GetCommandString(UINT_PTR idCmd,
-	    UINT uFlags,
-	    UINT FAR *reserved,
-	    LPSTR pszName,
-	    UINT cchMax);
+	STDMETHODIMP GetCommandString(UINT_PTR idCmd,
+								  UINT uFlags,
+								  UINT FAR *reserved,
+								  LPSTR pszName,
+								  UINT cchMax);
 
-    //IShellExtInit methods
-    STDMETHODIMP Initialize(LPCITEMIDLIST pIDFolder,
-	    LPDATAOBJECT pDataObj,
-	    HKEY hKeyID);
+	//IShellExtInit methods
+	STDMETHODIMP Initialize(LPCITEMIDLIST pIDFolder,
+							LPDATAOBJECT pDataObj,
+							HKEY hKeyID);
 };
 
 typedef CShellExt *LPCSHELLEXT;

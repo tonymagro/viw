@@ -144,8 +144,8 @@
 #endif
 
 #if defined(_MSC_VER) || defined(__BORLANDC__)
-    /* Support for __try / __except.  All versions of MSVC and Borland C are
-     * expected to have this.  Any other compilers that support it? */
+/* Support for __try / __except.  All versions of MSVC and Borland C are
+ * expected to have this.  Any other compilers that support it? */
 # define HAVE_TRY_EXCEPT 1
 # include <malloc.h>		/* for _resetstkoflw() */
 # if defined(_MSC_VER) && (_MSC_VER >= 1300)
@@ -164,7 +164,7 @@
 #ifdef _DEBUG
 
 # if defined(_MSC_VER)	&&  (_MSC_VER >= 1000)
-   /* Use the new debugging tools in Visual C++ 4.x */
+/* Use the new debugging tools in Visual C++ 4.x */
 #  include <crtdbg.h>
 #  define ASSERT(f) _ASSERT(f)
 # else
@@ -185,7 +185,7 @@ Trace(char *pszFormat, ...);
 
 #else /* !_DEBUG */
 
-  /* These macros should all compile away to nothing */
+/* These macros should all compile away to nothing */
 # define ASSERT(f)		((void)0)
 # define TRACE			1 ? (void)0 : printf
 # define TRACE0(sz)
@@ -215,7 +215,7 @@ Trace(char *pszFormat, ...);
 
 /* Enable common dialogs input unicode from IME if possible. */
 #ifdef FEAT_MBYTE
-    /* The variables are defined in os_win32.c. */
+/* The variables are defined in os_win32.c. */
 extern LRESULT (WINAPI *pDispatchMessage)(CONST MSG *);
 extern BOOL (WINAPI *pGetMessage)(LPMSG, HWND, UINT, UINT);
 extern BOOL (WINAPI *pIsDialogMessage)(HWND, LPMSG);

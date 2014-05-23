@@ -165,10 +165,10 @@
  */
 #ifdef VMS
 # define mch_access(n, p)	access(vms_fixfilename(n), (p))
-				/* see mch_open() comment */
+/* see mch_open() comment */
 # define mch_fopen(n, p)	fopen(vms_fixfilename(n), (p))
 # define mch_fstat(n, p)	fstat(vms_fixfilename(n), (p))
-	/* VMS does not have lstat() */
+/* VMS does not have lstat() */
 # define mch_stat(n, p)		stat(vms_fixfilename(n), (p))
 #else
 # ifndef WIN32
@@ -182,8 +182,8 @@
 #  define mch_stat(n, p)	vim_stat((n), (p))
 # else
 #  ifdef STAT_IGNORES_SLASH
-    /* On Solaris stat() accepts "file/" as if it was "file".  Return -1 if
-     * the name ends in "/" and it's not a directory. */
+/* On Solaris stat() accepts "file/" as if it was "file".  Return -1 if
+ * the name ends in "/" and it's not a directory. */
 #   define mch_stat(n, p)	(illegal_slash(n) ? -1 : stat((n), (p)))
 #  else
 #   define mch_stat(n, p)	stat((n), (p))
@@ -245,7 +245,7 @@
 #endif
 
 #ifdef FEAT_RIGHTLEFT
-    /* Whether to draw the vertical bar on the right side of the cell. */
+/* Whether to draw the vertical bar on the right side of the cell. */
 # define CURSOR_BAR_RIGHT (curwin->w_p_rl && (!(State & CMDLINE) || cmdmsg_rl))
 #endif
 

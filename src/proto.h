@@ -42,9 +42,9 @@
 #  include "os_msdos.pro"
 # endif
 # ifdef WIN16
-   typedef LPSTR LPWSTR;
-   typedef LPCSTR LPCWSTR;
-   typedef int LPBOOL;
+typedef LPSTR LPWSTR;
+typedef LPCSTR LPCWSTR;
+typedef int LPBOOL;
 #  include "os_win16.pro"
 #  include "os_mswin.pro"
 #  include "winclip.pro"
@@ -102,8 +102,8 @@ extern int _stricoll __ARGS((char *a, char *b));
 # endif
 
 # if !defined MESSAGE_FILE || defined(HAVE_STDARG_H)
-    /* These prototypes cannot be produced automatically and conflict with
-     * the old-style prototypes in message.c. */
+/* These prototypes cannot be produced automatically and conflict with
+ * the old-style prototypes in message.c. */
 int
 #  ifdef __BORLANDC__
 _RTLENTRYF
@@ -269,11 +269,11 @@ extern char *vim_SelFile __ARGS((Widget toplevel, char *prompt, char *init_path,
 #if defined(FEAT_PERL) && !defined(IN_PERL_FILE)
 # define CV void
 # ifdef __BORLANDC__
-  #pragma option -pc
+#pragma option -pc
 # endif
 # include "if_perl.pro"
 # ifdef __BORLANDC__
-  #pragma option -p.
+#pragma option -p.
 # endif
 # include "if_perlsfio.pro"
 #endif

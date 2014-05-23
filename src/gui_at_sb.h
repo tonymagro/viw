@@ -96,39 +96,38 @@ extern WidgetClass vim_scrollbarWidgetClass;
 
 extern void vim_XawScrollbarSetThumb __ARGS((Widget, double, double, double));
 
-typedef struct
-{
-     /* public */
-    Pixel	  foreground;	/* thumb foreground color */
-    XtOrientation orientation;	/* horizontal or vertical */
-    XtCallbackList scrollProc;	/* proportional scroll */
-    XtCallbackList thumbProc;	/* jump (to position) scroll */
-    XtCallbackList jumpProc;	/* same as thumbProc but pass data by ref */
-    Pixmap	  thumb;	/* thumb color */
-    float	  top;		/* What percent is above the win's top */
-    float	  shown;	/* What percent is shown in the win */
-    float	  max;		/* Maximum value for top */
-    Dimension	  length;	/* either height or width */
-    Dimension	  thickness;	/* either width or height */
-    Dimension	  min_thumb;	/* minimum size for the thumb. */
+typedef struct {
+	/* public */
+	Pixel	  foreground;	/* thumb foreground color */
+	XtOrientation orientation;	/* horizontal or vertical */
+	XtCallbackList scrollProc;	/* proportional scroll */
+	XtCallbackList thumbProc;	/* jump (to position) scroll */
+	XtCallbackList jumpProc;	/* same as thumbProc but pass data by ref */
+	Pixmap	  thumb;	/* thumb color */
+	float	  top;		/* What percent is above the win's top */
+	float	  shown;	/* What percent is shown in the win */
+	float	  max;		/* Maximum value for top */
+	Dimension	  length;	/* either height or width */
+	Dimension	  thickness;	/* either width or height */
+	Dimension	  min_thumb;	/* minimum size for the thumb. */
 
-     /* private */
-    XtIntervalId  timer_id;	/* autorepeat timer; remove on destruction */
-    char	  scroll_mode;	/* see below */
-    float	  scroll_off;	/* offset from event to top of thumb */
-    GC		  gc;		/* a (shared) gc */
-    Position	  topLoc;	/* Pixel that corresponds to top */
-    Dimension	  shownLength;	/* Num pixels corresponding to shown */
+	/* private */
+	XtIntervalId  timer_id;	/* autorepeat timer; remove on destruction */
+	char	  scroll_mode;	/* see below */
+	float	  scroll_off;	/* offset from event to top of thumb */
+	GC		  gc;		/* a (shared) gc */
+	Position	  topLoc;	/* Pixel that corresponds to top */
+	Dimension	  shownLength;	/* Num pixels corresponding to shown */
 
-    /* From 3d widget */
-    Dimension	shadow_width;
-    Pixel	top_shadow_pixel;
-    Pixel	bot_shadow_pixel;
-    Bool	limit_thumb;	/* limit thumb to inside scrollbar */
-    int		top_shadow_contrast;
-    int		bot_shadow_contrast;
-    GC		top_shadow_GC;
-    GC		bot_shadow_GC;
+	/* From 3d widget */
+	Dimension	shadow_width;
+	Pixel	top_shadow_pixel;
+	Pixel	bot_shadow_pixel;
+	Bool	limit_thumb;	/* limit thumb to inside scrollbar */
+	int		top_shadow_contrast;
+	int		bot_shadow_contrast;
+	GC		top_shadow_GC;
+	GC		bot_shadow_GC;
 } ScrollbarPart;
 
 #define SMODE_NONE		0
@@ -143,17 +142,19 @@ typedef struct
 #define END_PAGE_DATA		9999
 
 typedef struct _ScrollbarRec {
-    CorePart		core;
-    SimplePart		simple;
-    ScrollbarPart	scrollbar;
+	CorePart		core;
+	SimplePart		simple;
+	ScrollbarPart	scrollbar;
 } ScrollbarRec;
 
-typedef struct {int empty;} ScrollbarClassPart;
+typedef struct {
+	int empty;
+} ScrollbarClassPart;
 
 typedef struct _ScrollbarClassRec {
-    CoreClassPart		core_class;
-    SimpleClassPart		simple_class;
-    ScrollbarClassPart		scrollbar_class;
+	CoreClassPart		core_class;
+	SimpleClassPart		simple_class;
+	ScrollbarClassPart		scrollbar_class;
 } ScrollbarClassRec;
 
 extern ScrollbarClassRec vim_scrollbarClassRec;

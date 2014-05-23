@@ -188,47 +188,51 @@
 
 EXTERN char_u farsi_text_1[]
 #ifdef DO_INIT
-		= { YE_, _SIN, RE, ALEF_, _FE, ' ', 'V', 'I', 'M',
-		    ' ', F_HE, _BE, ' ', SHIN, RE, _GAF, DAL,' ', NOON,
-		    ALEF_, _YE, ALEF_, _PE, '\0'}
+	= { YE_, _SIN, RE, ALEF_, _FE, ' ', 'V', 'I', 'M',
+		' ', F_HE, _BE, ' ', SHIN, RE, _GAF, DAL,' ', NOON,
+		ALEF_, _YE, ALEF_, _PE, '\0'
+	  }
 #endif
-		     ;
+	  ;
 
 EXTERN char_u farsi_text_2[]
 #ifdef DO_INIT
-		= { YE_, _SIN, RE, ALEF_, _FE, ' ', FARSI_3, FARSI_3,
-		    FARSI_4, FARSI_2, ' ', DAL, RE, ALEF, DAL, _NOON,
-		    ALEF_, _TE, _SIN, ALEF, ' ', F_HE, _BE, ' ', SHIN,
-		    RE,  _GAF, DAL, ' ', NOON, ALEF_, _YE, ALEF_, _PE, '\0'}
+	= { YE_, _SIN, RE, ALEF_, _FE, ' ', FARSI_3, FARSI_3,
+		FARSI_4, FARSI_2, ' ', DAL, RE, ALEF, DAL, _NOON,
+		ALEF_, _TE, _SIN, ALEF, ' ', F_HE, _BE, ' ', SHIN,
+		RE,  _GAF, DAL, ' ', NOON, ALEF_, _YE, ALEF_, _PE, '\0'
+	  }
 #endif
-		     ;
+	  ;
 
 EXTERN char_u farsi_text_3[]
 #ifdef DO_INIT
-		= { DAL, WAW, _SHIN, _YE, _MIM, _NOON, ' ', YE_, _NOON,
-		    ALEF_,_BE, _YE, _TE, _SHIN, _PE, ' ', 'R','E','P','L',
-		    'A','C','E', ' ', NOON, ALEF_, _MIM, RE, _FE, ZE, ALEF,
-		    ' ', 'R', 'E', 'V', 'E', 'R', 'S', 'E', ' ', 'I', 'N',
-		    'S', 'E', 'R', 'T', ' ', SHIN, WAW, RE, ' ', ALEF_, _BE,
-		    ' ', YE_, _SIN, RE, ALEF_, _FE, ' ', RE, DAL, ' ', RE,
-		    ALEF_, _KAF,' ', MIM, ALEF_, _GAF, _NOON, _HE, '\0'}
+	= { DAL, WAW, _SHIN, _YE, _MIM, _NOON, ' ', YE_, _NOON,
+		ALEF_,_BE, _YE, _TE, _SHIN, _PE, ' ', 'R','E','P','L',
+		'A','C','E', ' ', NOON, ALEF_, _MIM, RE, _FE, ZE, ALEF,
+		' ', 'R', 'E', 'V', 'E', 'R', 'S', 'E', ' ', 'I', 'N',
+		'S', 'E', 'R', 'T', ' ', SHIN, WAW, RE, ' ', ALEF_, _BE,
+		' ', YE_, _SIN, RE, ALEF_, _FE, ' ', RE, DAL, ' ', RE,
+		ALEF_, _KAF,' ', MIM, ALEF_, _GAF, _NOON, _HE, '\0'
+	  }
 #endif
-		    ;
+	  ;
 
 #if 0 /* not used */
 EXTERN char_u farsi_text_4[]
 #ifdef DO_INIT
-		= { DAL, WAW, _SHIN, _YE, _MIM, _NOON, ' ', YE_, _NOON,
-		    ALEF_, _BE, _YE, _TE, _SHIN, _PE, ' ', '<', 'C','T','R',
-		    'L','-','B','>', ' ', NOON, ALEF_, _MIM, RE, _FE, ZE,
-		    ALEF, ' ', YE_, _SIN, RE, ALEF_, _FE, ' ', RE, DAL, ' ',
-		    RE, ALEF_, _KAF,' ', MIM, ALEF_, _GAF, _NOON, _HE, '\0'}
+	= { DAL, WAW, _SHIN, _YE, _MIM, _NOON, ' ', YE_, _NOON,
+		ALEF_, _BE, _YE, _TE, _SHIN, _PE, ' ', '<', 'C','T','R',
+		'L','-','B','>', ' ', NOON, ALEF_, _MIM, RE, _FE, ZE,
+		ALEF, ' ', YE_, _SIN, RE, ALEF_, _FE, ' ', RE, DAL, ' ',
+		RE, ALEF_, _KAF,' ', MIM, ALEF_, _GAF, _NOON, _HE, '\0'
+	  }
 #endif
-		    ;
+	  ;
 #endif
 
 EXTERN char_u farsi_text_5[]
 #ifdef DO_INIT
-		= { ' ', YE_, _SIN, RE, ALEF_, _FE, '\0'}
+	= { ' ', YE_, _SIN, RE, ALEF_, _FE, '\0'}
 #endif
-		    ;
+	  ;

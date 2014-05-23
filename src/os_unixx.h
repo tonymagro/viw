@@ -17,7 +17,7 @@
 # define signal sigset
 #endif
 
-   /* sun's sys/ioctl.h redefines symbols from termio world */
+/* sun's sys/ioctl.h redefines symbols from termio world */
 #if defined(HAVE_SYS_IOCTL_H) && !defined(sun)
 # include <sys/ioctl.h>
 #endif
@@ -114,7 +114,7 @@
 /* shared library access */
 #if defined(HAVE_DLFCN_H) && defined(USE_DLOPEN)
 # ifdef __MVS__
-    /* needed to define RTLD_LAZY (Anthony Giorgio) */
+/* needed to define RTLD_LAZY (Anthony Giorgio) */
 #  define __SUSV3
 # endif
 # include <dlfcn.h>

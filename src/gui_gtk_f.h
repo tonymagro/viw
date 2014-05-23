@@ -27,26 +27,24 @@ extern "C" {
 typedef struct _GtkForm GtkForm;
 typedef struct _GtkFormClass GtkFormClass;
 
-struct _GtkForm
-{
-    GtkContainer container;
+struct _GtkForm {
+	GtkContainer container;
 
-    GList *children;
+	GList *children;
 
-    guint width;
-    guint height;
+	guint width;
+	guint height;
 
-    GdkWindow *bin_window;
+	GdkWindow *bin_window;
 
-    GdkVisibilityState visibility;
-    gulong configure_serial;
+	GdkVisibilityState visibility;
+	gulong configure_serial;
 
-    gint freeze_count;
+	gint freeze_count;
 };
 
-struct _GtkFormClass
-{
-    GtkContainerClass parent_class;
+struct _GtkFormClass {
+	GtkContainerClass parent_class;
 };
 
 GtkType gtk_form_get_type(void);
@@ -54,14 +52,14 @@ GtkType gtk_form_get_type(void);
 GtkWidget *gtk_form_new(void);
 
 void gtk_form_put(GtkForm * form, GtkWidget * widget,
-	gint x, gint y);
+				  gint x, gint y);
 
 void gtk_form_move(GtkForm *form, GtkWidget * widget,
-	gint x, gint y);
+				   gint x, gint y);
 
 void gtk_form_move_resize(GtkForm * form, GtkWidget * widget,
-	gint x, gint y,
-	gint w, gint h);
+						  gint x, gint y,
+						  gint w, gint h);
 
 /* These disable and enable moving and repainting respectively.  If you
  * want to update the layout's offsets but do not want it to repaint

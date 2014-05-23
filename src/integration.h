@@ -221,15 +221,15 @@ void workshop_moved_marks(char *filename);
  * remember the last filename/clientData used.
  */
 int workshop_get_positions(void *frame,
-			   char **filename,
-			   int *curLine,
-			   int *curCol,
-			   int *selStartLine,
-			   int *selStartCol,
-			   int *selEndLine,
-			   int *selEndCol,
-			   int *selLength,
-			   char **selection);
+						   char **filename,
+						   int *curLine,
+						   int *curCol,
+						   int *selStartLine,
+						   int *selStartCol,
+						   int *selEndLine,
+						   int *selEndCol,
+						   int *selLength,
+						   char **selection);
 
 /* The following function should return the height of a character
  * in the text display. This is used to pick out a suitable size
@@ -248,9 +248,9 @@ int workshop_get_font_height(void);
  * The remove function unregisters the hotkey.
  */
 void workshop_register_hotkey(Modifiers modifiers, KeySym keysym,
-			      void *clientData);
+							  void *clientData);
 void workshop_unregister_hotkey(Modifiers modifiers, KeySym keysym,
-				void *clientData);
+								void *clientData);
 
 
 
@@ -322,8 +322,8 @@ void workshop_move_mark(char *filename, int markId, int newLineno);
  * Each frame's clientData ("frame") should be unique.
  */
 void *workshop_add_frame(void *frame, Widget form,
-			   Widget top, Widget bottom, Widget footer,
-			   Widget menu);
+						 Widget top, Widget bottom, Widget footer,
+						 Widget menu);
 
 /* Delete a window/frame. Call this when an editor window is being deleted. */
 void workshop_delete_frame(void *handle);
@@ -361,12 +361,12 @@ void workshop_remove_balloon_eval_area(void *frame, void *window, Widget widget)
  * pointing at a different file with a different scope) ?
  */
 int workshop_get_balloon_text(Position x, Position y,
-			      void *frame,
-			      void *window,
-			      char **filename,
-			      int *line,
-			      char **text,
-			      int *mouseIndex);
+							  void *frame,
+							  void *window,
+							  char **filename,
+							  int *line,
+							  char **text,
+							  int *mouseIndex);
 
 
 /* Window size and location

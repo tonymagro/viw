@@ -18,53 +18,51 @@
 # endif
 #endif
 
-typedef enum
-{
-    ShS_NEUTRAL,			/* nothing showing or pending */
-    ShS_PENDING,			/* data requested from debugger */
-    ShS_UPDATE_PENDING,			/* switching information displayed */
-    ShS_SHOWING				/* the balloon is being displayed */
+typedef enum {
+	ShS_NEUTRAL,			/* nothing showing or pending */
+	ShS_PENDING,			/* data requested from debugger */
+	ShS_UPDATE_PENDING,			/* switching information displayed */
+	ShS_SHOWING				/* the balloon is being displayed */
 } BeState;
 
-typedef struct BalloonEvalStruct
-{
+typedef struct BalloonEvalStruct {
 #ifdef FEAT_GUI_GTK
-    GtkWidget		*target;	/* widget we are monitoring */
-    GtkWidget		*balloonShell;
-    GtkWidget		*balloonLabel;
-    unsigned int	timerID;	/* timer for run */
-    BeState		showState;	/* tells us whats currently going on */
-    int			x;
-    int			y;
-    unsigned int	state;		/* Button/Modifier key state */
+	GtkWidget		*target;	/* widget we are monitoring */
+	GtkWidget		*balloonShell;
+	GtkWidget		*balloonLabel;
+	unsigned int	timerID;	/* timer for run */
+	BeState		showState;	/* tells us whats currently going on */
+	int			x;
+	int			y;
+	unsigned int	state;		/* Button/Modifier key state */
 #else
 # if !defined(FEAT_GUI_W32)
-    Widget		target;		/* widget we are monitoring */
-    Widget		balloonShell;
-    Widget		balloonLabel;
-    XtIntervalId	timerID;	/* timer for run */
-    BeState		showState;	/* tells us whats currently going on */
-    XtAppContext	appContext;	/* used in event handler */
-    Position		x;
-    Position		y;
-    Position		x_root;
-    Position		y_root;
-    int			state;		/* Button/Modifier key state */
+	Widget		target;		/* widget we are monitoring */
+	Widget		balloonShell;
+	Widget		balloonLabel;
+	XtIntervalId	timerID;	/* timer for run */
+	BeState		showState;	/* tells us whats currently going on */
+	XtAppContext	appContext;	/* used in event handler */
+	Position		x;
+	Position		y;
+	Position		x_root;
+	Position		y_root;
+	int			state;		/* Button/Modifier key state */
 # else
-    HWND		target;
-    HWND		balloon;
-    int			x;
-    int			y;
-    BeState		showState;	/* tells us whats currently going on */
+	HWND		target;
+	HWND		balloon;
+	int			x;
+	int			y;
+	BeState		showState;	/* tells us whats currently going on */
 # endif
 #endif
-    int			ts;		/* tabstop setting for this buffer */
-    char_u		*msg;
-    void		(*msgCB)__ARGS((struct BalloonEvalStruct *, int));
-    void		*clientData;	/* For callback */
+	int			ts;		/* tabstop setting for this buffer */
+	char_u		*msg;
+	void		(*msgCB)__ARGS((struct BalloonEvalStruct *, int));
+	void		*clientData;	/* For callback */
 #if !defined(FEAT_GUI_GTK) && !defined(FEAT_GUI_W32)
-    Dimension		screen_width;	/* screen width in pixels */
-    Dimension		screen_height;	/* screen height in pixels */
+	Dimension		screen_width;	/* screen width in pixels */
+	Dimension		screen_height;	/* screen height in pixels */
 #endif
 } BalloonEval;
 

@@ -82,8 +82,8 @@
 #endif
 
 #ifndef __ARGS
-    /* The AIX VisualAge cc compiler defines __EXTENDED__ instead of __STDC__
-     * because it includes pre-ansi features. */
+/* The AIX VisualAge cc compiler defines __EXTENDED__ instead of __STDC__
+ * because it includes pre-ansi features. */
 # if defined(__STDC__) || defined(__GNUC__) || defined(__EXTENDED__)
 #  define __ARGS(x) x
 # else
@@ -514,8 +514,8 @@ int mch_rename __ARGS((const char *src, const char *dest));
 # endif
 # ifndef VMS
 #  ifdef __MVS__
-  /* on OS390 Unix getenv() doesn't return a pointer to persistent
-   * storage -> use __getenv() */
+/* on OS390 Unix getenv() doesn't return a pointer to persistent
+ * storage -> use __getenv() */
 #   define mch_getenv(x) (char_u *)__getenv((char *)(x))
 #  else
 #   define mch_getenv(x) (char_u *)getenv((char *)(x))

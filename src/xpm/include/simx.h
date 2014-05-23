@@ -48,7 +48,7 @@
     includes, since this is included from xpm.h */
 /* these defines get undefed at the end of this file */
 #if __STDC__ || defined(__cplusplus) || defined(c_plusplus)
- /* ANSI || C++ */
+/* ANSI || C++ */
 #define FUNC(f, t, p) extern t f p
 #define LFUNC(f, t, p) static t f p
 #else /* k&R */
@@ -77,15 +77,15 @@ typedef COLORREF Pixel;
 #define PIXEL_ALREADY_TYPEDEFED		/* to let xpm.h know about it */
 
 typedef struct {
-    Pixel pixel;
-    BYTE red, green, blue;
+	Pixel pixel;
+	BYTE red, green, blue;
 }      XColor;
 
 typedef struct {
-    HBITMAP bitmap;
-    unsigned int width;
-    unsigned int height;
-    unsigned int depth;
+	HBITMAP bitmap;
+	unsigned int width;
+	unsigned int height;
+	unsigned int depth;
 }      XImage;
 
 #if defined(__cplusplus) || defined(c_plusplus)
@@ -94,28 +94,28 @@ extern "C" {
 /* some replacements for X... functions */
 
 /* XDefaultXXX */
-    FUNC(XDefaultVisual, Visual *, (Display *display, Screen *screen));
-    FUNC(XDefaultScreen, Screen *, (Display *d));
-    FUNC(XDefaultColormap, Colormap *, (Display *display, Screen *screen));
-    FUNC(XDefaultDepth, int, (Display *d, Screen *s));
+FUNC(XDefaultVisual, Visual *, (Display *display, Screen *screen));
+FUNC(XDefaultScreen, Screen *, (Display *d));
+FUNC(XDefaultColormap, Colormap *, (Display *display, Screen *screen));
+FUNC(XDefaultDepth, int, (Display *d, Screen *s));
 
 /* color related */
-    FUNC(XParseColor, int, (Display *, Colormap *, char *, XColor *));
-    FUNC(XAllocColor, int, (Display *, Colormap *, XColor *));
-    FUNC(XQueryColors, void, (Display *display, Colormap *colormap,
-			      XColor *xcolors, int ncolors));
-    FUNC(XFreeColors, int, (Display *d, Colormap cmap,
-			    unsigned long pixels[],
-			    int npixels, unsigned long planes));
+FUNC(XParseColor, int, (Display *, Colormap *, char *, XColor *));
+FUNC(XAllocColor, int, (Display *, Colormap *, XColor *));
+FUNC(XQueryColors, void, (Display *display, Colormap *colormap,
+						  XColor *xcolors, int ncolors));
+FUNC(XFreeColors, int, (Display *d, Colormap cmap,
+						unsigned long pixels[],
+						int npixels, unsigned long planes));
 /* XImage */
-    FUNC(XCreateImage, XImage *, (Display *, Visual *, int depth, int format,
-				  int x, int y, int width, int height,
-				  int pad, int foo));
+FUNC(XCreateImage, XImage *, (Display *, Visual *, int depth, int format,
+							  int x, int y, int width, int height,
+							  int pad, int foo));
 
 /* free and destroy bitmap */
-    FUNC(XDestroyImage, void /* ? */ , (XImage *));
+FUNC(XDestroyImage, void /* ? */ , (XImage *));
 /* free only, bitmap remains */
-    FUNC(XImageFree, void, (XImage *));
+FUNC(XImageFree, void, (XImage *));
 #if defined(__cplusplus) || defined(c_plusplus)
 } /* end of extern "C" */
 #endif /* cplusplus */

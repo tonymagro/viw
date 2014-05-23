@@ -20,12 +20,12 @@
 EXTERN long	Rows			/* nr of rows in the screen */
 #ifdef DO_INIT
 # if defined(MSDOS) || defined(WIN3264) || defined(OS2)
-			    = 25L
+	= 25L
 # else
-			    = 24L
+	= 24L
 # endif
 #endif
-			    ;
+	  ;
 EXTERN long	Columns INIT(= 80);	/* nr of columns in the screen */
 
 /*
@@ -134,7 +134,7 @@ EXTERN int	compl_interrupted INIT(= FALSE);
 EXTERN int	compl_cont_status INIT(= 0);
 # define CONT_ADDING	1	/* "normal" or "adding" expansion */
 # define CONT_INTRPT	(2 + 4)	/* a ^X interrupted the current expansion */
-				/* it's set only iff N_ADDS is set */
+/* it's set only iff N_ADDS is set */
 # define CONT_N_ADDS	4	/* next ^X<> will add-new or expand-current */
 # define CONT_S_IPOS	8	/* next ^X<> will set initial_pos?
 				 * if so, word-wise-expansion will set SOL */
@@ -156,9 +156,9 @@ EXTERN int	msg_row;
 EXTERN int	msg_scrolled;	/* Number of screen lines that windows have
 				 * scrolled because of printing messages. */
 EXTERN int	msg_scrolled_ign INIT(= FALSE);
-				/* when TRUE don't set need_wait_return in
-				   msg_puts_attr() when msg_scrolled is
-				   non-zero */
+/* when TRUE don't set need_wait_return in
+   msg_puts_attr() when msg_scrolled is
+   non-zero */
 
 EXTERN char_u	*keep_msg INIT(= NULL);	    /* msg to be shown after redraw */
 EXTERN int	keep_msg_attr INIT(= 0);    /* highlight attr for keep_msg */
@@ -620,67 +620,67 @@ EXTERN char_u	*vim_tempdir INIT(= NULL); /* Name of Vim's own temp dir.
  * updating).
  */
 EXTERN int	starting INIT(= NO_SCREEN);
-				/* first NO_SCREEN, then NO_BUFFERS and then
-				 * set to 0 when starting up finished */
+/* first NO_SCREEN, then NO_BUFFERS and then
+ * set to 0 when starting up finished */
 EXTERN int	exiting INIT(= FALSE);
-				/* TRUE when planning to exit Vim.  Might
-				 * still keep on running if there is a changed
-				 * buffer. */
+/* TRUE when planning to exit Vim.  Might
+ * still keep on running if there is a changed
+ * buffer. */
 EXTERN int	really_exiting INIT(= FALSE);
-				/* TRUE when we are sure to exit, e.g., after
-				 * a deadly signal */
+/* TRUE when we are sure to exit, e.g., after
+ * a deadly signal */
 /* volatile because it is used in signal handler deathtrap(). */
 EXTERN volatile int full_screen INIT(= FALSE);
-				/* TRUE when doing full-screen output
-				 * otherwise only writing some messages */
+/* TRUE when doing full-screen output
+ * otherwise only writing some messages */
 
 EXTERN int	restricted INIT(= FALSE);
-				/* TRUE when started as "rvim" */
+/* TRUE when started as "rvim" */
 EXTERN int	secure INIT(= FALSE);
-				/* non-zero when only "safe" commands are
-				 * allowed, e.g. when sourcing .exrc or .vimrc
-				 * in current directory */
+/* non-zero when only "safe" commands are
+ * allowed, e.g. when sourcing .exrc or .vimrc
+ * in current directory */
 
 EXTERN int	textlock INIT(= 0);
-				/* non-zero when changing text and jumping to
-				 * another window or buffer is not allowed */
+/* non-zero when changing text and jumping to
+ * another window or buffer is not allowed */
 
 #ifdef FEAT_AUTOCMD
 EXTERN int	curbuf_lock INIT(= 0);
-				/* non-zero when the current buffer can't be
-				 * changed.  Used for FileChangedRO. */
+/* non-zero when the current buffer can't be
+ * changed.  Used for FileChangedRO. */
 EXTERN int	allbuf_lock INIT(= 0);
-				/* non-zero when no buffer name can be
-				 * changed, no buffer can be deleted and
-				 * current directory can't be changed.
-				 * Used for SwapExists et al. */
+/* non-zero when no buffer name can be
+ * changed, no buffer can be deleted and
+ * current directory can't be changed.
+ * Used for SwapExists et al. */
 #endif
 #ifdef FEAT_EVAL
 # define HAVE_SANDBOX
 EXTERN int	sandbox INIT(= 0);
-				/* Non-zero when evaluating an expression in a
-				 * "sandbox".  Several things are not allowed
-				 * then. */
+/* Non-zero when evaluating an expression in a
+ * "sandbox".  Several things are not allowed
+ * then. */
 #endif
 
 EXTERN int	silent_mode INIT(= FALSE);
-				/* set to TRUE when "-s" commandline argument
-				 * used for ex */
+/* set to TRUE when "-s" commandline argument
+ * used for ex */
 
 EXTERN pos_T	VIsual;		/* start position of active Visual selection */
 EXTERN int	VIsual_active INIT(= FALSE);
-				/* whether Visual mode is active */
+/* whether Visual mode is active */
 EXTERN int	VIsual_select INIT(= FALSE);
-				/* whether Select mode is active */
+/* whether Select mode is active */
 EXTERN int	VIsual_reselect;
-				/* whether to restart the selection after a
-				 * Select mode mapping or menu */
+/* whether to restart the selection after a
+ * Select mode mapping or menu */
 
 EXTERN int	VIsual_mode INIT(= 'v');
-				/* type of Visual mode */
+/* type of Visual mode */
 
 EXTERN int	redo_VIsual_busy INIT(= FALSE);
-				/* TRUE when redoing Visual */
+/* TRUE when redoing Visual */
 
 #ifdef FEAT_MOUSE
 /*
@@ -748,7 +748,7 @@ EXTERN pos_T	saved_cursor		/* w_cursor before formatting text. */
 #ifdef DO_INIT
 	= INIT_POS_T(0, 0, 0)
 #endif
-	;
+	  ;
 
 /*
  * Stuff for insert mode.
@@ -970,10 +970,10 @@ EXTERN int	cmd_silent INIT(= FALSE); /* don't echo the command line */
 	|| defined(FEAT_AUTOCMD)
 # define HAS_SWAP_EXISTS_ACTION
 EXTERN int	swap_exists_action INIT(= SEA_NONE);
-					/* For dialog when swap file already
-					 * exists. */
+/* For dialog when swap file already
+ * exists. */
 EXTERN int	swap_exists_did_quit INIT(= FALSE);
-					/* Selected "quit" at the dialog. */
+/* Selected "quit" at the dialog. */
 #endif
 
 EXTERN char_u	*IObuff;		/* sprintf's are done in this buffer,
@@ -990,9 +990,9 @@ EXTERN int	recoverymode INIT(= FALSE); /* Set to TRUE for "-r" option */
 
 EXTERN typebuf_T typebuf		/* typeahead buffer */
 #ifdef DO_INIT
-		    = {NULL, NULL, 0, 0, 0, 0, 0, 0, 0}
+	= {NULL, NULL, 0, 0, 0, 0, 0, 0, 0}
 #endif
-		    ;
+	  ;
 #ifdef FEAT_EX_EXTRA
 EXTERN int	ex_normal_busy INIT(= 0); /* recursiveness of ex_normal() */
 EXTERN int	ex_normal_lock INIT(= 0); /* forbid use of ex_normal() */
@@ -1047,15 +1047,15 @@ EXTERN reg_extmatch_T *re_extmatch_out INIT(= NULL); /* Set by vim_regexec()
 #endif
 
 EXTERN int	did_outofmem_msg INIT(= FALSE);
-					    /* set after out of memory msg */
+/* set after out of memory msg */
 EXTERN int	did_swapwrite_msg INIT(= FALSE);
-					    /* set after swap write error msg */
+/* set after swap write error msg */
 EXTERN int	undo_off INIT(= FALSE);	    /* undo switched off for now */
 EXTERN int	global_busy INIT(= 0);	    /* set when :global is executing */
 EXTERN int	listcmd_busy INIT(= FALSE); /* set when :argdo, :windo or
 					       :bufdo is executing */
 EXTERN int	need_start_insertmode INIT(= FALSE);
-					    /* start insert mode soon */
+/* start insert mode soon */
 EXTERN char_u	*last_cmdline INIT(= NULL); /* last command line (for ":) */
 EXTERN char_u	*repeat_cmdline INIT(= NULL); /* command line for "." */
 #ifdef FEAT_CMDHIST
@@ -1069,9 +1069,9 @@ EXTERN char_u	*autocmd_match INIT(= NULL); /* name for <amatch> on cmdline */
 EXTERN int	did_cursorhold INIT(= FALSE); /* set when CursorHold t'gerd */
 EXTERN pos_T	last_cursormoved	      /* for CursorMoved event */
 # ifdef DO_INIT
-			= INIT_POS_T(0, 0, 0)
+	= INIT_POS_T(0, 0, 0)
 # endif
-			;
+	  ;
 EXTERN int	last_changedtick INIT(= 0);   /* for TextChanged event */
 EXTERN buf_T	*last_changedtick_buf INIT(= NULL);
 #endif
@@ -1088,7 +1088,7 @@ EXTERN int	g_do_tagpreview INIT(= 0);  /* for tag preview commands:
 EXTERN int	replace_offset INIT(= 0);   /* offset for replace_push() */
 
 EXTERN char_u	*escape_chars INIT(= (char_u *)" \t\\\"|");
-					    /* need backslash in cmd line */
+/* need backslash in cmd line */
 
 EXTERN int	keep_help_flag INIT(= FALSE); /* doing :ta from help file */
 
@@ -1253,22 +1253,21 @@ extern cursorentry_T shape_table[SHAPE_IDX_COUNT];
 
 EXTERN option_table_T printer_opts[OPT_PRINT_NUM_OPTIONS]
 # ifdef DO_INIT
- =
-{
-    {"top",	TRUE, 0, NULL, 0, FALSE},
-    {"bottom",	TRUE, 0, NULL, 0, FALSE},
-    {"left",	TRUE, 0, NULL, 0, FALSE},
-    {"right",	TRUE, 0, NULL, 0, FALSE},
-    {"header",	TRUE, 0, NULL, 0, FALSE},
-    {"syntax",	FALSE, 0, NULL, 0, FALSE},
-    {"number",	FALSE, 0, NULL, 0, FALSE},
-    {"wrap",	FALSE, 0, NULL, 0, FALSE},
-    {"duplex",	FALSE, 0, NULL, 0, FALSE},
-    {"portrait", FALSE, 0, NULL, 0, FALSE},
-    {"paper",	FALSE, 0, NULL, 0, FALSE},
-    {"collate",	FALSE, 0, NULL, 0, FALSE},
-    {"jobsplit", FALSE, 0, NULL, 0, FALSE},
-    {"formfeed", FALSE, 0, NULL, 0, FALSE},
+= {
+	{"top",	TRUE, 0, NULL, 0, FALSE},
+	{"bottom",	TRUE, 0, NULL, 0, FALSE},
+	{"left",	TRUE, 0, NULL, 0, FALSE},
+	{"right",	TRUE, 0, NULL, 0, FALSE},
+	{"header",	TRUE, 0, NULL, 0, FALSE},
+	{"syntax",	FALSE, 0, NULL, 0, FALSE},
+	{"number",	FALSE, 0, NULL, 0, FALSE},
+	{"wrap",	FALSE, 0, NULL, 0, FALSE},
+	{"duplex",	FALSE, 0, NULL, 0, FALSE},
+	{"portrait", FALSE, 0, NULL, 0, FALSE},
+	{"paper",	FALSE, 0, NULL, 0, FALSE},
+	{"collate",	FALSE, 0, NULL, 0, FALSE},
+	{"jobsplit", FALSE, 0, NULL, 0, FALSE},
+	{"formfeed", FALSE, 0, NULL, 0, FALSE},
 }
 # endif
 ;
@@ -1339,9 +1338,9 @@ EXTERN char	psepc INIT(= '\\');	/* normal path separator character */
 EXTERN char	psepcN INIT(= '/');	/* abnormal path separator character */
 EXTERN char	pseps[2]		/* normal path separator string */
 # ifdef DO_INIT
-			= {'\\', 0}
+	= {'\\', 0}
 # endif
-			;
+	  ;
 #endif
 
 #ifdef FEAT_VIRTUALEDIT
@@ -1380,7 +1379,7 @@ EXTERN garray_T error_ga
 # ifdef DO_INIT
 	= {0, 0, 0, 0, NULL}
 # endif
-	;
+	  ;
 #endif
 
 #ifdef FEAT_NETBEANS_INTG

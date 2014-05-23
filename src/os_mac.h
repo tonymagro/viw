@@ -250,7 +250,7 @@
 /*# define mch_setenv(name, val, x) setenv((name), (val)) */ /* Obsoleted by Dany on Oct 30, 2001 */
 #  define mch_setenv(name, val, x) setenv(name, val, x)
 # else
-  /* vim_getenv() is in pty.c */
+/* vim_getenv() is in pty.c */
 #  define USE_VIMPTY_GETENV
 #  define mch_getenv(x) vimpty_getenv(x)
 #  define mch_setenv(name, val, x) setenv(name, val, x)

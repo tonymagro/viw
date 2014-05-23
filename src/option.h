@@ -461,8 +461,9 @@ EXTERN char_u	*p_fdo;		/* 'foldopen' */
 EXTERN unsigned	fdo_flags;
 # ifdef IN_OPTION_C
 static char *(p_fdo_values[]) = {"all", "block", "hor", "mark", "percent",
-				 "quickfix", "search", "tag", "insert",
-				 "undo", "jump", NULL};
+								 "quickfix", "search", "tag", "insert",
+								 "undo", "jump", NULL
+								};
 # endif
 # define FDO_ALL		0x001
 # define FDO_BLOCK		0x002
@@ -687,8 +688,9 @@ EXTERN unsigned	ssop_flags;
 # ifdef IN_OPTION_C
 /* Also used for 'viewoptions'! */
 static char *(p_ssop_values[]) = {"buffers", "winpos", "resize", "winsize",
-    "localoptions", "options", "help", "blank", "globals", "slash", "unix",
-    "sesdir", "curdir", "folds", "cursor", "tabpages", NULL};
+								  "localoptions", "options", "help", "blank", "globals", "slash", "unix",
+								  "sesdir", "curdir", "folds", "cursor", "tabpages", NULL
+								 };
 # endif
 # define SSOP_BUFFERS		0x001
 # define SSOP_WINPOS		0x002
@@ -908,129 +910,128 @@ EXTERN long	p_wd;		/* 'writedelay' */
  * These need to be defined globally, so that the BV_COUNT can be used with
  * b_p_scriptID[].
  */
-enum
-{
-    BV_AI = 0
-    , BV_AR
+enum {
+	BV_AI = 0
+			, BV_AR
 #ifdef FEAT_QUICKFIX
-    , BV_BH
-    , BV_BT
-    , BV_EFM
-    , BV_GP
-    , BV_MP
+	, BV_BH
+	, BV_BT
+	, BV_EFM
+	, BV_GP
+	, BV_MP
 #endif
-    , BV_BIN
-    , BV_BL
+	, BV_BIN
+	, BV_BL
 #ifdef FEAT_MBYTE
-    , BV_BOMB
+	, BV_BOMB
 #endif
-    , BV_CI
+	, BV_CI
 #ifdef FEAT_CINDENT
-    , BV_CIN
-    , BV_CINK
-    , BV_CINO
+	, BV_CIN
+	, BV_CINK
+	, BV_CINO
 #endif
 #if defined(FEAT_SMARTINDENT) || defined(FEAT_CINDENT)
-    , BV_CINW
+	, BV_CINW
 #endif
-    , BV_CM
+	, BV_CM
 #ifdef FEAT_FOLDING
-    , BV_CMS
+	, BV_CMS
 #endif
 #ifdef FEAT_COMMENTS
-    , BV_COM
+	, BV_COM
 #endif
 #ifdef FEAT_INS_EXPAND
-    , BV_CPT
-    , BV_DICT
-    , BV_TSR
+	, BV_CPT
+	, BV_DICT
+	, BV_TSR
 #endif
 #ifdef FEAT_COMPL_FUNC
-    , BV_CFU
+	, BV_CFU
 #endif
 #ifdef FEAT_FIND_ID
-    , BV_DEF
-    , BV_INC
+	, BV_DEF
+	, BV_INC
 #endif
-    , BV_EOL
-    , BV_EP
-    , BV_ET
-    , BV_FENC
+	, BV_EOL
+	, BV_EP
+	, BV_ET
+	, BV_FENC
 #ifdef FEAT_EVAL
-    , BV_BEXPR
-    , BV_FEX
+	, BV_BEXPR
+	, BV_FEX
 #endif
-    , BV_FF
-    , BV_FLP
-    , BV_FO
+	, BV_FF
+	, BV_FLP
+	, BV_FO
 #ifdef FEAT_AUTOCMD
-    , BV_FT
+	, BV_FT
 #endif
-    , BV_IMI
-    , BV_IMS
+	, BV_IMI
+	, BV_IMS
 #if defined(FEAT_CINDENT) && defined(FEAT_EVAL)
-    , BV_INDE
-    , BV_INDK
+	, BV_INDE
+	, BV_INDK
 #endif
 #if defined(FEAT_FIND_ID) && defined(FEAT_EVAL)
-    , BV_INEX
+	, BV_INEX
 #endif
-    , BV_INF
-    , BV_ISK
+	, BV_INF
+	, BV_ISK
 #ifdef FEAT_CRYPT
-    , BV_KEY
+	, BV_KEY
 #endif
 #ifdef FEAT_KEYMAP
-    , BV_KMAP
+	, BV_KMAP
 #endif
-    , BV_KP
+	, BV_KP
 #ifdef FEAT_LISP
-    , BV_LISP
-    , BV_LW
+	, BV_LISP
+	, BV_LW
 #endif
-    , BV_MA
-    , BV_ML
-    , BV_MOD
-    , BV_MPS
-    , BV_NF
+	, BV_MA
+	, BV_ML
+	, BV_MOD
+	, BV_MPS
+	, BV_NF
 #ifdef FEAT_COMPL_FUNC
-    , BV_OFU
+	, BV_OFU
 #endif
-    , BV_PATH
-    , BV_PI
+	, BV_PATH
+	, BV_PI
 #ifdef FEAT_TEXTOBJ
-    , BV_QE
+	, BV_QE
 #endif
-    , BV_RO
+	, BV_RO
 #ifdef FEAT_SMARTINDENT
-    , BV_SI
+	, BV_SI
 #endif
 #ifndef SHORT_FNAME
-    , BV_SN
+	, BV_SN
 #endif
 #ifdef FEAT_SYN_HL
-    , BV_SMC
-    , BV_SYN
+	, BV_SMC
+	, BV_SYN
 #endif
 #ifdef FEAT_SPELL
-    , BV_SPC
-    , BV_SPF
-    , BV_SPL
+	, BV_SPC
+	, BV_SPF
+	, BV_SPL
 #endif
-    , BV_STS
+	, BV_STS
 #ifdef FEAT_SEARCHPATH
-    , BV_SUA
+	, BV_SUA
 #endif
-    , BV_SW
-    , BV_SWF
-    , BV_TAGS
-    , BV_TS
-    , BV_TW
-    , BV_TX
-    , BV_UDF
-    , BV_UL
-    , BV_WM
-    , BV_COUNT	    /* must be the last one */
+	, BV_SW
+	, BV_SWF
+	, BV_TAGS
+	, BV_TS
+	, BV_TW
+	, BV_TX
+	, BV_UDF
+	, BV_UL
+	, BV_WM
+	, BV_COUNT	    /* must be the last one */
 };
 
 /*
@@ -1038,74 +1039,73 @@ enum
  * These need to be defined globally, so that the WV_COUNT can be used in the
  * window structure.
  */
-enum
-{
-    WV_LIST = 0
+enum {
+	WV_LIST = 0
 #ifdef FEAT_ARABIC
-    , WV_ARAB
+			  , WV_ARAB
 #endif
 #ifdef FEAT_CONCEAL
-    , WV_COCU
-    , WV_COLE
+	, WV_COCU
+	, WV_COLE
 #endif
 #ifdef FEAT_CURSORBIND
-    , WV_CRBIND
+	, WV_CRBIND
 #endif
 #ifdef FEAT_DIFF
-    , WV_DIFF
+	, WV_DIFF
 #endif
 #ifdef FEAT_FOLDING
-    , WV_FDC
-    , WV_FEN
-    , WV_FDI
-    , WV_FDL
-    , WV_FDM
-    , WV_FML
-    , WV_FDN
+	, WV_FDC
+	, WV_FEN
+	, WV_FDI
+	, WV_FDL
+	, WV_FDM
+	, WV_FML
+	, WV_FDN
 # ifdef FEAT_EVAL
-    , WV_FDE
-    , WV_FDT
+	, WV_FDE
+	, WV_FDT
 # endif
-    , WV_FMR
+	, WV_FMR
 #endif
 #ifdef FEAT_LINEBREAK
-    , WV_LBR
+	, WV_LBR
 #endif
-    , WV_NU
-    , WV_RNU
+	, WV_NU
+	, WV_RNU
 #ifdef FEAT_LINEBREAK
-    , WV_NUW
+	, WV_NUW
 #endif
 #if defined(FEAT_WINDOWS) && defined(FEAT_QUICKFIX)
-    , WV_PVW
+	, WV_PVW
 #endif
 #ifdef FEAT_RIGHTLEFT
-    , WV_RL
-    , WV_RLC
+	, WV_RL
+	, WV_RLC
 #endif
 #ifdef FEAT_SCROLLBIND
-    , WV_SCBIND
+	, WV_SCBIND
 #endif
-    , WV_SCROLL
+	, WV_SCROLL
 #ifdef FEAT_SPELL
-    , WV_SPELL
+	, WV_SPELL
 #endif
 #ifdef FEAT_SYN_HL
-    , WV_CUC
-    , WV_CUL
-    , WV_CC
+	, WV_CUC
+	, WV_CUL
+	, WV_CC
 #endif
 #ifdef FEAT_STL_OPT
-    , WV_STL
+	, WV_STL
 #endif
 #ifdef FEAT_WINDOWS
-    , WV_WFH
+	, WV_WFH
 #endif
 #ifdef FEAT_VERTSPLIT
-    , WV_WFW
+	, WV_WFW
 #endif
-    , WV_WRAP
-    , WV_COUNT	    /* must be the last one */
+	, WV_WRAP
+	, WV_COUNT	    /* must be the last one */
 };
 
 /* Value for b_p_ul indicating the global value must be used. */

@@ -38,9 +38,9 @@
 //#define WSDEBUG_SENSE	2
 
 typedef enum {
-		WT_ENV = 1,		/* look for env var if set */
-		WT_WAIT,		/* look for ~/.gvimwait if set */
-		WT_STOP			/* look for ~/.gvimstop if set */
+	WT_ENV = 1,		/* look for env var if set */
+	WT_WAIT,		/* look for ~/.gvimwait if set */
+	WT_STOP			/* look for ~/.gvimstop if set */
 } WtWait;
 
 

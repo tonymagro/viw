@@ -75,7 +75,7 @@
 #define Ctrl_X		24
 #define Ctrl_Y		25
 #define Ctrl_Z		26
-			    /* CTRL- [ Left Square Bracket == ESC*/
+/* CTRL- [ Left Square Bracket == ESC*/
 #define Ctrl_BSL	28  /* \ BackSLash */
 #define Ctrl_RSB	29  /* ] Right Square Bracket */
 #define Ctrl_HAT	30  /* ^ */
@@ -156,7 +156,7 @@
 #define Ctrl_X		0x18
 #define Ctrl_Y		0x19
 #define Ctrl_Z		0x3F
-			    /* CTRL- [ Left Square Bracket == ESC*/
+/* CTRL- [ Left Square Bracket == ESC*/
 #define Ctrl_RSB	0x1D  /* ] Right Square Bracket */
 #define Ctrl_BSL	0x1C  /* \ BackSLash */
 #define Ctrl_HAT	0x1E  /* ^ */

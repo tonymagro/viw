@@ -8,16 +8,16 @@
 
 class CCommands :
 	public   CComDualImpl < ICommands,
-				 &IID_ICommands,
-				 &LIBID_VisVim >,
+	&IID_ICommands,
+	&LIBID_VisVim >,
 	public   CComObjectRoot,
 	public   CComCoClass < CCommands,
-				 &CLSID_Commands >
+	&CLSID_Commands >
 {
-    protected:
+protected:
 	IApplication * m_pApplication;
 
-    public:
+public:
 	CCommands ();
 	~CCommands ();
 	void SetApplicationObject (IApplication * m_pApplication);
@@ -33,24 +33,24 @@ class CCommands :
 	END_COM_MAP ()
 	DECLARE_NOT_AGGREGATABLE (CCommands)
 
-    protected:
+protected:
 	// This class template is used as the base class for the Application
 	// event handler object and the Debugger event handler object,
 	// which are declared below.
 	template < class IEvents,
-		const IID * piidEvents,
-		const GUID * plibid,
-		class XEvents,
-		const CLSID * pClsidEvents >
-		class XEventHandler :
+			   const IID * piidEvents,
+			   const GUID * plibid,
+			   class XEvents,
+			   const CLSID * pClsidEvents >
+	class XEventHandler :
 		public	      CComDualImpl < IEvents,
-			      piidEvents,
-			      plibid >,
+		piidEvents,
+		plibid >,
 		public	      CComObjectRoot,
 		public	      CComCoClass < XEvents,
-			      pClsidEvents >
+		pClsidEvents >
 	{
-	    public:
+	public:
 		BEGIN_COM_MAP (XEvents)
 		COM_INTERFACE_ENTRY (IDispatch)
 		COM_INTERFACE_ENTRY_IID (*piidEvents, IEvents)
@@ -59,7 +59,7 @@ class CCommands :
 		void Connect (IUnknown * pUnk)
 		{
 			VERIFY (SUCCEEDED (AtlAdvise (pUnk, this, *piidEvents,
-						      &m_dwAdvise)));
+										  &m_dwAdvise)));
 		}
 		void Disconnect (IUnknown * pUnk)
 		{
@@ -68,18 +68,18 @@ class CCommands :
 
 		CCommands *m_pCommands;
 
-	    protected:
+	protected:
 		DWORD m_dwAdvise;
 	};
 
 	// This object handles events fired by the Application object
 	class XApplicationEvents : public XEventHandler < IApplicationEvents,
-			&IID_IApplicationEvents,
-			&LIBID_VisVim,
-			XApplicationEvents,
-			&CLSID_ApplicationEvents >
+		&IID_IApplicationEvents,
+		&LIBID_VisVim,
+		XApplicationEvents,
+		&CLSID_ApplicationEvents >
 	{
-	    public:
+	public:
 		// IApplicationEvents methods
 		STDMETHOD (BeforeBuildStart) (THIS);
 		STDMETHOD (BuildFinish) (THIS_ long nNumErrors, long nNumWarnings);
@@ -99,19 +99,19 @@ class CCommands :
 
 	// This object handles events fired by the Application object
 	class XDebuggerEvents : public XEventHandler < IDebuggerEvents,
-			&IID_IDebuggerEvents,
-			&LIBID_VisVim,
-			XDebuggerEvents,
-			&CLSID_DebuggerEvents >
+		&IID_IDebuggerEvents,
+		&LIBID_VisVim,
+		XDebuggerEvents,
+		&CLSID_DebuggerEvents >
 	{
-	    public:
+	public:
 		// IDebuggerEvents method
 		STDMETHOD (BreakpointHit) (THIS_ IDispatch * pBreakpoint);
 	};
 	typedef CComObject < XDebuggerEvents > XDebuggerEventsObj;
 	XDebuggerEventsObj *m_pDebuggerEventsObj;
 
-    public:
+public:
 	// ICommands methods
 	STDMETHOD (VisVimDialog) (THIS);
 	STDMETHOD (VisVimEnable) (THIS);

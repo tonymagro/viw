@@ -655,7 +655,8 @@
 #endif
 
 #if defined(FEAT_MBYTE) && VIM_SIZEOF_INT < 4 && !defined(PROTO)
-	Error: Can only handle multi-byte feature with 32 bit int or larger
+Error:
+Can only handle multi-byte feature with 32 bit int or larger
 #endif
 
 /* Use iconv() when it's available. */
@@ -688,7 +689,8 @@
 #  define FEAT_XFONTSET			/* Hangul input requires xfontset */
 # endif
 # if defined(FEAT_XIM) && !defined(LINT)
-	Error: You should select only ONE of XIM and HANGUL INPUT
+Error:
+You should select only ONE of XIM and HANGUL INPUT
 # endif
 #endif
 #if defined(FEAT_HANGULIN) || defined(FEAT_XIM)

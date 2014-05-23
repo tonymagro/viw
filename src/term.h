@@ -23,68 +23,67 @@ typedef unsigned char char_u;
 /*
  * Index of the termcap codes in the term_strings array.
  */
-enum SpecialKey
-{
-    KS_NAME = 0,/* name of this terminal entry */
-    KS_CE,	/* clear to end of line */
-    KS_AL,	/* add new blank line */
-    KS_CAL,	/* add number of blank lines */
-    KS_DL,	/* delete line */
-    KS_CDL,	/* delete number of lines */
-    KS_CS,	/* scroll region */
-    KS_CL,	/* clear screen */
-    KS_CD,	/* clear to end of display */
-    KS_UT,	/* clearing uses current background color */
-    KS_DA,	/* text may be scrolled down from up */
-    KS_DB,	/* text may be scrolled up from down */
-    KS_VI,	/* cursor invisible */
-    KS_VE,	/* cursor visible */
-    KS_VS,	/* cursor very visible */
-    KS_ME,	/* normal mode */
-    KS_MR,	/* reverse mode */
-    KS_MD,	/* bold mode */
-    KS_SE,	/* normal mode */
-    KS_SO,	/* standout mode */
-    KS_CZH,	/* italic mode start */
-    KS_CZR,	/* italic mode end */
-    KS_UE,	/* exit underscore (underline) mode */
-    KS_US,	/* underscore (underline) mode */
-    KS_UCE,	/* exit undercurl mode */
-    KS_UCS,	/* undercurl mode */
-    KS_MS,	/* save to move cur in reverse mode */
-    KS_CM,	/* cursor motion */
-    KS_SR,	/* scroll reverse (backward) */
-    KS_CRI,	/* cursor number of chars right */
-    KS_VB,	/* visual bell */
-    KS_KS,	/* put term in "keypad transmit" mode */
-    KS_KE,	/* out of "keypad transmit" mode */
-    KS_TI,	/* put terminal in termcap mode */
-    KS_TE,	/* out of termcap mode */
-    KS_BC,	/* backspace character (cursor left) */
-    KS_CCS,	/* cur is relative to scroll region */
-    KS_CCO,	/* number of colors */
-    KS_CSF,	/* set foreground color */
-    KS_CSB,	/* set background color */
-    KS_XS,	/* standout not erased by overwriting (hpterm) */
-    KS_MB,	/* blink mode */
-    KS_CAF,	/* set foreground color (ANSI) */
-    KS_CAB,	/* set background color (ANSI) */
-    KS_LE,	/* cursor left (mostly backspace) */
-    KS_ND,	/* cursor right */
-    KS_CIS,	/* set icon text start */
-    KS_CIE,	/* set icon text end */
-    KS_TS,	/* set window title start (to status line)*/
-    KS_FS,	/* set window title end (from status line) */
-    KS_CWP,	/* set window position in pixels */
-    KS_CWS,	/* set window size in characters */
-    KS_CRV,	/* request version string */
-    KS_CSI,	/* start insert mode (bar cursor) */
-    KS_CEI,	/* end insert mode (block cursor) */
+enum SpecialKey {
+	KS_NAME = 0,/* name of this terminal entry */
+	KS_CE,	/* clear to end of line */
+	KS_AL,	/* add new blank line */
+	KS_CAL,	/* add number of blank lines */
+	KS_DL,	/* delete line */
+	KS_CDL,	/* delete number of lines */
+	KS_CS,	/* scroll region */
+	KS_CL,	/* clear screen */
+	KS_CD,	/* clear to end of display */
+	KS_UT,	/* clearing uses current background color */
+	KS_DA,	/* text may be scrolled down from up */
+	KS_DB,	/* text may be scrolled up from down */
+	KS_VI,	/* cursor invisible */
+	KS_VE,	/* cursor visible */
+	KS_VS,	/* cursor very visible */
+	KS_ME,	/* normal mode */
+	KS_MR,	/* reverse mode */
+	KS_MD,	/* bold mode */
+	KS_SE,	/* normal mode */
+	KS_SO,	/* standout mode */
+	KS_CZH,	/* italic mode start */
+	KS_CZR,	/* italic mode end */
+	KS_UE,	/* exit underscore (underline) mode */
+	KS_US,	/* underscore (underline) mode */
+	KS_UCE,	/* exit undercurl mode */
+	KS_UCS,	/* undercurl mode */
+	KS_MS,	/* save to move cur in reverse mode */
+	KS_CM,	/* cursor motion */
+	KS_SR,	/* scroll reverse (backward) */
+	KS_CRI,	/* cursor number of chars right */
+	KS_VB,	/* visual bell */
+	KS_KS,	/* put term in "keypad transmit" mode */
+	KS_KE,	/* out of "keypad transmit" mode */
+	KS_TI,	/* put terminal in termcap mode */
+	KS_TE,	/* out of termcap mode */
+	KS_BC,	/* backspace character (cursor left) */
+	KS_CCS,	/* cur is relative to scroll region */
+	KS_CCO,	/* number of colors */
+	KS_CSF,	/* set foreground color */
+	KS_CSB,	/* set background color */
+	KS_XS,	/* standout not erased by overwriting (hpterm) */
+	KS_MB,	/* blink mode */
+	KS_CAF,	/* set foreground color (ANSI) */
+	KS_CAB,	/* set background color (ANSI) */
+	KS_LE,	/* cursor left (mostly backspace) */
+	KS_ND,	/* cursor right */
+	KS_CIS,	/* set icon text start */
+	KS_CIE,	/* set icon text end */
+	KS_TS,	/* set window title start (to status line)*/
+	KS_FS,	/* set window title end (from status line) */
+	KS_CWP,	/* set window position in pixels */
+	KS_CWS,	/* set window size in characters */
+	KS_CRV,	/* request version string */
+	KS_CSI,	/* start insert mode (bar cursor) */
+	KS_CEI,	/* end insert mode (block cursor) */
 #ifdef FEAT_VERTSPLIT
-    KS_CSV,	/* scroll region vertical */
+	KS_CSV,	/* scroll region vertical */
 #endif
-    KS_OP,	/* original color pair */
-    KS_U7	/* request cursor position */
+	KS_OP,	/* original color pair */
+	KS_U7	/* request cursor position */
 };
 
 #define KS_LAST	    KS_U7

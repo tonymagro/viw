@@ -10,12 +10,11 @@
 //
 // Button Structure
 //
-typedef struct tagTBBUTTON
-{
-    int  iBitmap;	 // index into bitmap of this button's picture
-    int  idCommand;	 // WM_COMMAND menu ID that this button sends
-    BYTE fsState;	 // button's state
-    BYTE fsStyle;	 // button's style
+typedef struct tagTBBUTTON {
+	int  iBitmap;	 // index into bitmap of this button's picture
+	int  idCommand;	 // WM_COMMAND menu ID that this button sends
+	BYTE fsState;	 // button's state
+	BYTE fsStyle;	 // button's style
 } TBBUTTON;
 
 typedef TBBUTTON NEAR* PTBBUTTON;
@@ -44,10 +43,9 @@ typedef const TBBUTTON FAR* LPCTBBUTTON;
 
 
 
-typedef struct tagADJUSTINFO
-{
-    TBBUTTON tbButton;
-    char szDescription[1];
+typedef struct tagADJUSTINFO {
+	TBBUTTON tbButton;
+	char szDescription[1];
 } ADJUSTINFO;
 
 typedef ADJUSTINFO NEAR* PADJUSTINFO;
@@ -55,8 +53,8 @@ typedef ADJUSTINFO FAR* LPADJUSTINFO;
 
 
 HWND WINAPI CreateToolbar(HWND hwnd, DWORD ws, WORD wID, int nBitmaps,
-	HINSTANCE hBMInst, WORD wBMID,
-	LPCTBBUTTON lpButtons, int iNumButtons);
+						  HINSTANCE hBMInst, WORD wBMID,
+						  LPCTBBUTTON lpButtons, int iNumButtons);
 
 #define CMB_DISCARDABLE 0x01    // create bitmap as discardable
 #define CMB_MASKED      0x02    // create image/mask pair in bitmap

@@ -21,9 +21,9 @@
     defined(DYNAMIC_ICONV) || \
     defined(DYNAMIC_IME) || \
     defined(XPM)
-  #pragma option -pc
+#pragma option -pc
 # else
-  #pragma option -pr
+#pragma option -pr
 # endif
 #endif
 
@@ -44,7 +44,8 @@
  * test program.  Other items from configure may also be wrong then!
  */
 # if (VIM_SIZEOF_INT == 0)
-    Error: configure did not run properly.  Check auto/config.log.
+Error:
+configure did not run properly.  Check auto/config.log.
 # endif
 
 /*
@@ -64,8 +65,8 @@
 # if defined(uint32_t)  /* this doesn't catch typedefs, unfortunately */
 #  define UINT32_TYPEDEF uint32_t
 # else
-  /* Fall back to assuming unsigned int is 32 bit.  If this is wrong then the
-   * test in blowfish.c will fail. */
+/* Fall back to assuming unsigned int is 32 bit.  If this is wrong then the
+ * test in blowfish.c will fail. */
 #  define UINT32_TYPEDEF unsigned int
 # endif
 #endif
@@ -114,7 +115,8 @@
 # define MACOS
 #endif
 #if defined(MACOS_X) && defined(MACOS_CLASSIC)
-    Error: To compile for both MACOS X and Classic use a Classic Carbon
+Error:
+To compile for both MACOS X and Classic use a Classic Carbon
 #endif
 /* Unless made through the Makefile enforce GUI on Mac */
 #if defined(MACOS) && !defined(HAVE_CONFIG_H)
@@ -175,7 +177,7 @@
 #endif
 
 #ifdef AMIGA
-  /* Be conservative about sizeof(int). It could be 4 too. */
+/* Be conservative about sizeof(int). It could be 4 too. */
 # ifndef FEAT_GUI_GTK	/* avoid problems when generating prototypes */
 #  ifdef __GNUC__
 #   define VIM_SIZEOF_INT	4
@@ -202,8 +204,8 @@
 #endif
 
 #ifdef NO_X11_INCLUDES
-    /* In os_mac_conv.c and os_macosx.m NO_X11_INCLUDES is defined to avoid
-     * X11 headers.  Disable all X11 related things to avoid conflicts. */
+/* In os_mac_conv.c and os_macosx.m NO_X11_INCLUDES is defined to avoid
+ * X11 headers.  Disable all X11 related things to avoid conflicts. */
 # ifdef FEAT_X11
 #  undef FEAT_X11
 # endif
@@ -276,7 +278,7 @@
 #endif
 
 #if defined(MACOS) && (defined(__MRC__) || defined(__SC__))
-   /* Apple's Compilers support prototypes */
+/* Apple's Compilers support prototypes */
 # define __ARGS(x) x
 #endif
 #ifndef __ARGS
@@ -376,7 +378,7 @@
 # define PATH_ESC_CHARS ((char_u *)" \t\n*?[{`%#'\"|!<")
 #else
 # ifdef VMS
-    /* VMS allows a lot of characters in the file name */
+/* VMS allows a lot of characters in the file name */
 #  define PATH_ESC_CHARS ((char_u *)" \t\n*?{`\\%#'\"|!")
 #  define SHELL_ESC_CHARS ((char_u *)" \t\n*?{`\\%#'|!()&")
 # else
@@ -404,11 +406,11 @@ typedef		 __int64	long_i;
 # define SCANF_DECIMAL_LONG_U   "%Iu"
 # define PRINTF_HEX_LONG_U      "0x%Ix"
 #else
-  /* Microsoft-specific. The __w64 keyword should be specified on any typedefs
-   * that change size between 32-bit and 64-bit platforms.  For any such type,
-   * __w64 should appear only on the 32-bit definition of the typedef.
-   * Define __w64 as an empty token for everything but MSVC 7.x or later.
-   */
+/* Microsoft-specific. The __w64 keyword should be specified on any typedefs
+ * that change size between 32-bit and 64-bit platforms.  For any such type,
+ * __w64 should appear only on the 32-bit definition of the typedef.
+ * Define __w64 as an empty token for everything but MSVC 7.x or later.
+ */
 # if !defined(_MSC_VER)	|| (_MSC_VER < 1300)
 #  define __w64
 # endif
@@ -1235,91 +1237,90 @@ extern char *(*dyn_libintl_textdomain)(const char *domainname);
 /*
  * Events for autocommands.
  */
-enum auto_event
-{
-    EVENT_BUFADD = 0,		/* after adding a buffer to the buffer list */
-    EVENT_BUFNEW,		/* after creating any buffer */
-    EVENT_BUFDELETE,		/* deleting a buffer from the buffer list */
-    EVENT_BUFWIPEOUT,		/* just before really deleting a buffer */
-    EVENT_BUFENTER,		/* after entering a buffer */
-    EVENT_BUFFILEPOST,		/* after renaming a buffer */
-    EVENT_BUFFILEPRE,		/* before renaming a buffer */
-    EVENT_BUFLEAVE,		/* before leaving a buffer */
-    EVENT_BUFNEWFILE,		/* when creating a buffer for a new file */
-    EVENT_BUFREADPOST,		/* after reading a buffer */
-    EVENT_BUFREADPRE,		/* before reading a buffer */
-    EVENT_BUFREADCMD,		/* read buffer using command */
-    EVENT_BUFUNLOAD,		/* just before unloading a buffer */
-    EVENT_BUFHIDDEN,		/* just after buffer becomes hidden */
-    EVENT_BUFWINENTER,		/* after showing a buffer in a window */
-    EVENT_BUFWINLEAVE,		/* just after buffer removed from window */
-    EVENT_BUFWRITEPOST,		/* after writing a buffer */
-    EVENT_BUFWRITEPRE,		/* before writing a buffer */
-    EVENT_BUFWRITECMD,		/* write buffer using command */
-    EVENT_CMDWINENTER,		/* after entering the cmdline window */
-    EVENT_CMDWINLEAVE,		/* before leaving the cmdline window */
-    EVENT_COLORSCHEME,		/* after loading a colorscheme */
-    EVENT_COMPLETEDONE,		/* after finishing insert complete */
-    EVENT_FILEAPPENDPOST,	/* after appending to a file */
-    EVENT_FILEAPPENDPRE,	/* before appending to a file */
-    EVENT_FILEAPPENDCMD,	/* append to a file using command */
-    EVENT_FILECHANGEDSHELL,	/* after shell command that changed file */
-    EVENT_FILECHANGEDSHELLPOST,	/* after (not) reloading changed file */
-    EVENT_FILECHANGEDRO,	/* before first change to read-only file */
-    EVENT_FILEREADPOST,		/* after reading a file */
-    EVENT_FILEREADPRE,		/* before reading a file */
-    EVENT_FILEREADCMD,		/* read from a file using command */
-    EVENT_FILETYPE,		/* new file type detected (user defined) */
-    EVENT_FILEWRITEPOST,	/* after writing a file */
-    EVENT_FILEWRITEPRE,		/* before writing a file */
-    EVENT_FILEWRITECMD,		/* write to a file using command */
-    EVENT_FILTERREADPOST,	/* after reading from a filter */
-    EVENT_FILTERREADPRE,	/* before reading from a filter */
-    EVENT_FILTERWRITEPOST,	/* after writing to a filter */
-    EVENT_FILTERWRITEPRE,	/* before writing to a filter */
-    EVENT_FOCUSGAINED,		/* got the focus */
-    EVENT_FOCUSLOST,		/* lost the focus to another app */
-    EVENT_GUIENTER,		/* after starting the GUI */
-    EVENT_GUIFAILED,		/* after starting the GUI failed */
-    EVENT_INSERTCHANGE,		/* when changing Insert/Replace mode */
-    EVENT_INSERTENTER,		/* when entering Insert mode */
-    EVENT_INSERTLEAVE,		/* when leaving Insert mode */
-    EVENT_MENUPOPUP,		/* just before popup menu is displayed */
-    EVENT_QUICKFIXCMDPOST,	/* after :make, :grep etc. */
-    EVENT_QUICKFIXCMDPRE,	/* before :make, :grep etc. */
-    EVENT_QUITPRE,		/* before :quit */
-    EVENT_SESSIONLOADPOST,	/* after loading a session file */
-    EVENT_STDINREADPOST,	/* after reading from stdin */
-    EVENT_STDINREADPRE,		/* before reading from stdin */
-    EVENT_SYNTAX,		/* syntax selected */
-    EVENT_TERMCHANGED,		/* after changing 'term' */
-    EVENT_TERMRESPONSE,		/* after setting "v:termresponse" */
-    EVENT_USER,			/* user defined autocommand */
-    EVENT_VIMENTER,		/* after starting Vim */
-    EVENT_VIMLEAVE,		/* before exiting Vim */
-    EVENT_VIMLEAVEPRE,		/* before exiting Vim and writing .viminfo */
-    EVENT_VIMRESIZED,		/* after Vim window was resized */
-    EVENT_WINENTER,		/* after entering a window */
-    EVENT_WINLEAVE,		/* before leaving a window */
-    EVENT_ENCODINGCHANGED,	/* after changing the 'encoding' option */
-    EVENT_INSERTCHARPRE,	/* before inserting a char */
-    EVENT_CURSORHOLD,		/* cursor in same position for a while */
-    EVENT_CURSORHOLDI,		/* idem, in Insert mode */
-    EVENT_FUNCUNDEFINED,	/* if calling a function which doesn't exist */
-    EVENT_REMOTEREPLY,		/* upon string reception from a remote vim */
-    EVENT_SWAPEXISTS,		/* found existing swap file */
-    EVENT_SOURCEPRE,		/* before sourcing a Vim script */
-    EVENT_SOURCECMD,		/* sourcing a Vim script using command */
-    EVENT_SPELLFILEMISSING,	/* spell file missing */
-    EVENT_CURSORMOVED,		/* cursor was moved */
-    EVENT_CURSORMOVEDI,		/* cursor was moved in Insert mode */
-    EVENT_TABLEAVE,		/* before leaving a tab page */
-    EVENT_TABENTER,		/* after entering a tab page */
-    EVENT_SHELLCMDPOST,		/* after ":!cmd" */
-    EVENT_SHELLFILTERPOST,	/* after ":1,2!cmd", ":w !cmd", ":r !cmd". */
-    EVENT_TEXTCHANGED,		/* text was modified */
-    EVENT_TEXTCHANGEDI,		/* text was modified in Insert mode*/
-    NUM_EVENTS			/* MUST be the last one */
+enum auto_event {
+	EVENT_BUFADD = 0,		/* after adding a buffer to the buffer list */
+	EVENT_BUFNEW,		/* after creating any buffer */
+	EVENT_BUFDELETE,		/* deleting a buffer from the buffer list */
+	EVENT_BUFWIPEOUT,		/* just before really deleting a buffer */
+	EVENT_BUFENTER,		/* after entering a buffer */
+	EVENT_BUFFILEPOST,		/* after renaming a buffer */
+	EVENT_BUFFILEPRE,		/* before renaming a buffer */
+	EVENT_BUFLEAVE,		/* before leaving a buffer */
+	EVENT_BUFNEWFILE,		/* when creating a buffer for a new file */
+	EVENT_BUFREADPOST,		/* after reading a buffer */
+	EVENT_BUFREADPRE,		/* before reading a buffer */
+	EVENT_BUFREADCMD,		/* read buffer using command */
+	EVENT_BUFUNLOAD,		/* just before unloading a buffer */
+	EVENT_BUFHIDDEN,		/* just after buffer becomes hidden */
+	EVENT_BUFWINENTER,		/* after showing a buffer in a window */
+	EVENT_BUFWINLEAVE,		/* just after buffer removed from window */
+	EVENT_BUFWRITEPOST,		/* after writing a buffer */
+	EVENT_BUFWRITEPRE,		/* before writing a buffer */
+	EVENT_BUFWRITECMD,		/* write buffer using command */
+	EVENT_CMDWINENTER,		/* after entering the cmdline window */
+	EVENT_CMDWINLEAVE,		/* before leaving the cmdline window */
+	EVENT_COLORSCHEME,		/* after loading a colorscheme */
+	EVENT_COMPLETEDONE,		/* after finishing insert complete */
+	EVENT_FILEAPPENDPOST,	/* after appending to a file */
+	EVENT_FILEAPPENDPRE,	/* before appending to a file */
+	EVENT_FILEAPPENDCMD,	/* append to a file using command */
+	EVENT_FILECHANGEDSHELL,	/* after shell command that changed file */
+	EVENT_FILECHANGEDSHELLPOST,	/* after (not) reloading changed file */
+	EVENT_FILECHANGEDRO,	/* before first change to read-only file */
+	EVENT_FILEREADPOST,		/* after reading a file */
+	EVENT_FILEREADPRE,		/* before reading a file */
+	EVENT_FILEREADCMD,		/* read from a file using command */
+	EVENT_FILETYPE,		/* new file type detected (user defined) */
+	EVENT_FILEWRITEPOST,	/* after writing a file */
+	EVENT_FILEWRITEPRE,		/* before writing a file */
+	EVENT_FILEWRITECMD,		/* write to a file using command */
+	EVENT_FILTERREADPOST,	/* after reading from a filter */
+	EVENT_FILTERREADPRE,	/* before reading from a filter */
+	EVENT_FILTERWRITEPOST,	/* after writing to a filter */
+	EVENT_FILTERWRITEPRE,	/* before writing to a filter */
+	EVENT_FOCUSGAINED,		/* got the focus */
+	EVENT_FOCUSLOST,		/* lost the focus to another app */
+	EVENT_GUIENTER,		/* after starting the GUI */
+	EVENT_GUIFAILED,		/* after starting the GUI failed */
+	EVENT_INSERTCHANGE,		/* when changing Insert/Replace mode */
+	EVENT_INSERTENTER,		/* when entering Insert mode */
+	EVENT_INSERTLEAVE,		/* when leaving Insert mode */
+	EVENT_MENUPOPUP,		/* just before popup menu is displayed */
+	EVENT_QUICKFIXCMDPOST,	/* after :make, :grep etc. */
+	EVENT_QUICKFIXCMDPRE,	/* before :make, :grep etc. */
+	EVENT_QUITPRE,		/* before :quit */
+	EVENT_SESSIONLOADPOST,	/* after loading a session file */
+	EVENT_STDINREADPOST,	/* after reading from stdin */
+	EVENT_STDINREADPRE,		/* before reading from stdin */
+	EVENT_SYNTAX,		/* syntax selected */
+	EVENT_TERMCHANGED,		/* after changing 'term' */
+	EVENT_TERMRESPONSE,		/* after setting "v:termresponse" */
+	EVENT_USER,			/* user defined autocommand */
+	EVENT_VIMENTER,		/* after starting Vim */
+	EVENT_VIMLEAVE,		/* before exiting Vim */
+	EVENT_VIMLEAVEPRE,		/* before exiting Vim and writing .viminfo */
+	EVENT_VIMRESIZED,		/* after Vim window was resized */
+	EVENT_WINENTER,		/* after entering a window */
+	EVENT_WINLEAVE,		/* before leaving a window */
+	EVENT_ENCODINGCHANGED,	/* after changing the 'encoding' option */
+	EVENT_INSERTCHARPRE,	/* before inserting a char */
+	EVENT_CURSORHOLD,		/* cursor in same position for a while */
+	EVENT_CURSORHOLDI,		/* idem, in Insert mode */
+	EVENT_FUNCUNDEFINED,	/* if calling a function which doesn't exist */
+	EVENT_REMOTEREPLY,		/* upon string reception from a remote vim */
+	EVENT_SWAPEXISTS,		/* found existing swap file */
+	EVENT_SOURCEPRE,		/* before sourcing a Vim script */
+	EVENT_SOURCECMD,		/* sourcing a Vim script using command */
+	EVENT_SPELLFILEMISSING,	/* spell file missing */
+	EVENT_CURSORMOVED,		/* cursor was moved */
+	EVENT_CURSORMOVEDI,		/* cursor was moved in Insert mode */
+	EVENT_TABLEAVE,		/* before leaving a tab page */
+	EVENT_TABENTER,		/* after entering a tab page */
+	EVENT_SHELLCMDPOST,		/* after ":!cmd" */
+	EVENT_SHELLFILTERPOST,	/* after ":1,2!cmd", ":w !cmd", ":r !cmd". */
+	EVENT_TEXTCHANGED,		/* text was modified */
+	EVENT_TEXTCHANGEDI,		/* text was modified in Insert mode*/
+	NUM_EVENTS			/* MUST be the last one */
 };
 
 typedef enum auto_event event_T;
@@ -1329,53 +1330,52 @@ typedef enum auto_event event_T;
  * When making changes, also update HL_FLAGS below!  And update the default
  * value of 'highlight' in option.c.
  */
-typedef enum
-{
-    HLF_8 = 0	    /* Meta & special keys listed with ":map", text that is
+typedef enum {
+	HLF_8 = 0	    /* Meta & special keys listed with ":map", text that is
 		       displayed different from what it is */
-    , HLF_AT	    /* @ and ~ characters at end of screen, characters that
+			, HLF_AT	    /* @ and ~ characters at end of screen, characters that
 		       don't really exist in the text */
-    , HLF_D	    /* directories in CTRL-D listing */
-    , HLF_E	    /* error messages */
-    , HLF_H	    /* obsolete, ignored */
-    , HLF_I	    /* incremental search */
-    , HLF_L	    /* last search string */
-    , HLF_M	    /* "--More--" message */
-    , HLF_CM	    /* Mode (e.g., "-- INSERT --") */
-    , HLF_N	    /* line number for ":number" and ":#" commands */
-    , HLF_CLN	    /* current line number */
-    , HLF_R	    /* return to continue message and yes/no questions */
-    , HLF_S	    /* status lines */
-    , HLF_SNC	    /* status lines of not-current windows */
-    , HLF_C	    /* column to separate vertically split windows */
-    , HLF_T	    /* Titles for output from ":set all", ":autocmd" etc. */
-    , HLF_V	    /* Visual mode */
-    , HLF_VNC	    /* Visual mode, autoselecting and not clipboard owner */
-    , HLF_W	    /* warning messages */
-    , HLF_WM	    /* Wildmenu highlight */
-    , HLF_FL	    /* Folded line */
-    , HLF_FC	    /* Fold column */
-    , HLF_ADD	    /* Added diff line */
-    , HLF_CHD	    /* Changed diff line */
-    , HLF_DED	    /* Deleted diff line */
-    , HLF_TXD	    /* Text Changed in diff line */
-    , HLF_CONCEAL   /* Concealed text */
-    , HLF_SC	    /* Sign column */
-    , HLF_SPB	    /* SpellBad */
-    , HLF_SPC	    /* SpellCap */
-    , HLF_SPR	    /* SpellRare */
-    , HLF_SPL	    /* SpellLocal */
-    , HLF_PNI	    /* popup menu normal item */
-    , HLF_PSI	    /* popup menu selected item */
-    , HLF_PSB	    /* popup menu scrollbar */
-    , HLF_PST	    /* popup menu scrollbar thumb */
-    , HLF_TP	    /* tabpage line */
-    , HLF_TPS	    /* tabpage line selected */
-    , HLF_TPF	    /* tabpage line filler */
-    , HLF_CUC	    /* 'cursurcolumn' */
-    , HLF_CUL	    /* 'cursurline' */
-    , HLF_MC	    /* 'colorcolumn' */
-    , HLF_COUNT	    /* MUST be the last one */
+	, HLF_D	    /* directories in CTRL-D listing */
+	, HLF_E	    /* error messages */
+	, HLF_H	    /* obsolete, ignored */
+	, HLF_I	    /* incremental search */
+	, HLF_L	    /* last search string */
+	, HLF_M	    /* "--More--" message */
+	, HLF_CM	    /* Mode (e.g., "-- INSERT --") */
+	, HLF_N	    /* line number for ":number" and ":#" commands */
+	, HLF_CLN	    /* current line number */
+	, HLF_R	    /* return to continue message and yes/no questions */
+	, HLF_S	    /* status lines */
+	, HLF_SNC	    /* status lines of not-current windows */
+	, HLF_C	    /* column to separate vertically split windows */
+	, HLF_T	    /* Titles for output from ":set all", ":autocmd" etc. */
+	, HLF_V	    /* Visual mode */
+	, HLF_VNC	    /* Visual mode, autoselecting and not clipboard owner */
+	, HLF_W	    /* warning messages */
+	, HLF_WM	    /* Wildmenu highlight */
+	, HLF_FL	    /* Folded line */
+	, HLF_FC	    /* Fold column */
+	, HLF_ADD	    /* Added diff line */
+	, HLF_CHD	    /* Changed diff line */
+	, HLF_DED	    /* Deleted diff line */
+	, HLF_TXD	    /* Text Changed in diff line */
+	, HLF_CONCEAL   /* Concealed text */
+	, HLF_SC	    /* Sign column */
+	, HLF_SPB	    /* SpellBad */
+	, HLF_SPC	    /* SpellCap */
+	, HLF_SPR	    /* SpellRare */
+	, HLF_SPL	    /* SpellLocal */
+	, HLF_PNI	    /* popup menu normal item */
+	, HLF_PSI	    /* popup menu selected item */
+	, HLF_PSB	    /* popup menu scrollbar */
+	, HLF_PST	    /* popup menu scrollbar thumb */
+	, HLF_TP	    /* tabpage line */
+	, HLF_TPS	    /* tabpage line selected */
+	, HLF_TPF	    /* tabpage line filler */
+	, HLF_CUC	    /* 'cursurcolumn' */
+	, HLF_CUL	    /* 'cursurline' */
+	, HLF_MC	    /* 'colorcolumn' */
+	, HLF_COUNT	    /* MUST be the last one */
 } hlf_T;
 
 /* The HL_FLAGS must be in the same order as the HLF_ enums!
@@ -1905,42 +1905,41 @@ typedef int proftime_T;	    /* dummy for function prototypes */
 #   define WM_OLE (WM_APP+0)
 #  endif
 #  ifdef FEAT_NETBEANS_INTG
-    /* message for Netbeans socket event */
+/* message for Netbeans socket event */
 #   define WM_NETBEANS (WM_APP+1)
 #  endif
 # endif
 
 /* Info about selected text */
-typedef struct VimClipboard
-{
-    int		available;	/* Is clipboard available? */
-    int		owned;		/* Flag: do we own the selection? */
-    pos_T	start;		/* Start of selected area */
-    pos_T	end;		/* End of selected area */
-    int		vmode;		/* Visual mode character */
+typedef struct VimClipboard {
+	int		available;	/* Is clipboard available? */
+	int		owned;		/* Flag: do we own the selection? */
+	pos_T	start;		/* Start of selected area */
+	pos_T	end;		/* End of selected area */
+	int		vmode;		/* Visual mode character */
 
-    /* Fields for selection that doesn't use Visual mode */
-    short_u	origin_row;
-    short_u	origin_start_col;
-    short_u	origin_end_col;
-    short_u	word_start_col;
-    short_u	word_end_col;
+	/* Fields for selection that doesn't use Visual mode */
+	short_u	origin_row;
+	short_u	origin_start_col;
+	short_u	origin_end_col;
+	short_u	word_start_col;
+	short_u	word_end_col;
 
-    pos_T	prev;		/* Previous position */
-    short_u	state;		/* Current selection state */
-    short_u	mode;		/* Select by char, word, or line. */
+	pos_T	prev;		/* Previous position */
+	short_u	state;		/* Current selection state */
+	short_u	mode;		/* Select by char, word, or line. */
 
 # if defined(FEAT_GUI_X11) || defined(FEAT_XCLIPBOARD)
-    Atom	sel_atom;	/* PRIMARY/CLIPBOARD selection ID */
+	Atom	sel_atom;	/* PRIMARY/CLIPBOARD selection ID */
 # endif
 
 # ifdef FEAT_GUI_GTK
-    GdkAtom     gtk_sel_atom;	/* PRIMARY/CLIPBOARD selection ID */
+	GdkAtom     gtk_sel_atom;	/* PRIMARY/CLIPBOARD selection ID */
 # endif
 
 # if defined(MSWIN) || defined(FEAT_CYGWIN_WIN32_CLIPBOARD)
-    int_u	format;		/* Vim's own special clipboard format */
-    int_u	format_raw;	/* Vim's raw text clipboard format */
+	int_u	format;		/* Vim's own special clipboard format */
+	int_u	format_raw;	/* Vim's raw text clipboard format */
 # endif
 } VimClipboard;
 #else
@@ -2027,12 +2026,12 @@ typedef int VimClipboard;	/* This is required for the prototypes. */
 
 /* stop using fastcall for Borland */
 #if defined(__BORLANDC__) && defined(WIN32) && !defined(DEBUG)
- #pragma option -p.
+#pragma option -p.
 #endif
 
 #ifdef _MSC_VER
 /* Avoid useless warning "conversion from X to Y of greater size". */
- #pragma warning(disable : 4312)
+#pragma warning(disable : 4312)
 #endif
 
 /* Note: a NULL argument for vim_realloc() is not portable, don't use it. */
@@ -2120,8 +2119,8 @@ typedef int VimClipboard;	/* This is required for the prototypes. */
 
 #if defined(FEAT_GUI) && defined(FEAT_XCLIPBOARD)
 # ifdef FEAT_GUI_GTK
-   /* Avoid using a global variable for the X display.  It's ugly
-    * and is likely to cause trouble in multihead environments. */
+/* Avoid using a global variable for the X display.  It's ugly
+ * and is likely to cause trouble in multihead environments. */
 #  define X_DISPLAY	((gui.in_use) ? gui_mch_get_display() : xterm_dpy)
 # else
 #  define X_DISPLAY	(gui.in_use ? gui.dpy : xterm_dpy)
@@ -2154,9 +2153,9 @@ typedef int VimClipboard;	/* This is required for the prototypes. */
 #endif
 
 #ifdef IN_PERL_FILE
-  /*
-   * Avoid clashes between Perl and Vim namespace.
-   */
+/*
+ * Avoid clashes between Perl and Vim namespace.
+ */
 # undef NORMAL
 # undef STRLEN
 # undef FF
@@ -2165,14 +2164,14 @@ typedef int VimClipboard;	/* This is required for the prototypes. */
 # ifdef __BORLANDC__
 #  define NOPROTO 1
 # endif
-  /* remove MAX and MIN, included by glib.h, redefined by sys/param.h */
+/* remove MAX and MIN, included by glib.h, redefined by sys/param.h */
 # ifdef MAX
 #  undef MAX
 # endif
 # ifdef MIN
 #  undef MIN
 # endif
-  /* We use _() for gettext(), Perl uses it for function prototypes... */
+/* We use _() for gettext(), Perl uses it for function prototypes... */
 # ifdef _
 #  undef _
 # endif
@@ -2185,14 +2184,14 @@ typedef int VimClipboard;	/* This is required for the prototypes. */
 # ifdef instr
 #  undef instr
 # endif
-  /* bool may cause trouble on MACOS but is required on a few other systems
-   * and for Perl */
+/* bool may cause trouble on MACOS but is required on a few other systems
+ * and for Perl */
 # if defined(bool) && defined(MACOS) && !defined(FEAT_PERL)
 #  undef bool
 # endif
 
 # ifdef __BORLANDC__
-  /* Borland has the structure stati64 but not _stati64 */
+/* Borland has the structure stati64 but not _stati64 */
 #  define _stati64 stati64
 # endif
 #endif
