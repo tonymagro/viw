@@ -9,8 +9,7 @@
 
 main()
 {
-	while (1)
-	{
+	while (1) {
 		printf("\e[?25h");
 		fflush(stdout);
 		usleep(400000);		/* on time */

@@ -122,7 +122,7 @@ workshop_connection_closed(void)
 	sd = -1;
 }
 
-	static char *
+static char *
 getCommand(void)
 {
 	int	 len;		/* length of this command */
@@ -136,7 +136,7 @@ getCommand(void)
 		len = atoi(lenbuf);
 		if (cbsize < (len + 1)) {
 			newcb = (char *) realloc(cmdbuf,
-			    MAX((len + 256), CMDBUFSIZ));
+									 MAX((len + 256), CMDBUFSIZ));
 			if (newcb != NULL) {
 				cmdbuf = newcb;
 				cbsize = MAX((len + 256), CMDBUFSIZ);
@@ -159,8 +159,8 @@ getCommand(void)
 
 void
 messageFromEserve(XtPointer clientData UNUSED,
-		  int *dum1 UNUSED,
-		  XtInputId *dum2 UNUSED)
+				  int *dum1 UNUSED,
+				  XtInputId *dum2 UNUSED)
 {
 	char	*cmd;		/* the 1st word of the command */
 
@@ -176,16 +176,16 @@ messageFromEserve(XtPointer clientData UNUSED,
 	switch (*cmd) {
 	case 'a':
 		if (cmd[1] == 'c' &&
-		    strncmp(cmd, NOCATGETS("ack "), 4) == 0) {
+				strncmp(cmd, NOCATGETS("ack "), 4) == 0) {
 			int ackNum;
 			char buf[20];
 
 			ackNum = atoi(&cmd[4]);
 			vim_snprintf(buf, sizeof(buf),
-					       NOCATGETS("ack %d\n"), ackNum);
+						 NOCATGETS("ack %d\n"), ackNum);
 			dummy = write(sd, buf, strlen(buf));
 		} else if (strncmp(cmd,
-		    NOCATGETS("addMarkType "), 12) == 0) {
+						   NOCATGETS("addMarkType "), 12) == 0) {
 			int idx;
 			char *color;
 			char *sign;
@@ -209,7 +209,7 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 'b':
 		if (strncmp(cmd,
-		    NOCATGETS("balloon "), 8) == 0) {
+					NOCATGETS("balloon "), 8) == 0) {
 			char *tip;
 
 			tip  = strtok(&cmd[8], NOCATGETS("\001"));
@@ -220,7 +220,7 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 'c':
 		if (strncmp(cmd,
-		    NOCATGETS("changeMarkType "), 15) == 0) {
+					NOCATGETS("changeMarkType "), 15) == 0) {
 			char *file;
 			int markId;
 			int type;
@@ -247,17 +247,17 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 'f':
 		if (cmd[1] == 'o' &&
-		    strncmp(cmd, NOCATGETS("footerMsg "), 10) == 0) {
+				strncmp(cmd, NOCATGETS("footerMsg "), 10) == 0) {
 			int severity;
 			char *message;
 
 			severity =
-			    atoi(strtok(&cmd[10], " "));
+				atoi(strtok(&cmd[10], " "));
 			message = strtok(NULL, NOCATGETS("\001"));
 
 			workshop_footer_message(message, severity);
 		} else if (strncmp(cmd,
-		    NOCATGETS("frontFile "), 10) == 0) {
+						   NOCATGETS("frontFile "), 10) == 0) {
 			char *file;
 
 			file  = strtok(&cmd[10], " ");
@@ -268,7 +268,7 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 'g':
 		if (cmd[1] == 'e' &&
-		    strncmp(cmd, NOCATGETS("getMarkLine "), 12) == 0) {
+				strncmp(cmd, NOCATGETS("getMarkLine "), 12) == 0) {
 			char *file;
 			int markid;
 			int line;
@@ -278,11 +278,11 @@ messageFromEserve(XtPointer clientData UNUSED,
 			markid = atoi(strtok(NULL, " "));
 			line = workshop_get_mark_lineno(file, markid);
 			vim_snprintf(buf, sizeof(buf),
-					     NOCATGETS("markLine %s %d %d\n"),
-			    file, markid, line);
+						 NOCATGETS("markLine %s %d %d\n"),
+						 file, markid, line);
 			dummy = write(sd, buf, strlen(buf));
 		} else if (cmd[1] == 'o' && cmd[4] == 'L' &&
-		    strncmp(cmd, NOCATGETS("gotoLine "), 9) == 0) {
+				   strncmp(cmd, NOCATGETS("gotoLine "), 9) == 0) {
 			char *file;
 			int lineno;
 
@@ -290,7 +290,7 @@ messageFromEserve(XtPointer clientData UNUSED,
 			lineno = atoi(strtok(NULL, " "));
 			workshop_goto_line(file, lineno);
 		} else if (strncmp(cmd,
-		    NOCATGETS("gotoMark "), 9) == 0) {
+						   NOCATGETS("gotoMark "), 9) == 0) {
 			char *file;
 			int markId;
 			char *message;
@@ -304,34 +304,34 @@ messageFromEserve(XtPointer clientData UNUSED,
 			char *f = workshop_test_getcurrentfile();
 			char buffer[2*MAXPATHLEN];
 			vim_snprintf(buffer, sizeof(buffer),
-					NOCATGETS("currentFile %d %s"),
-				f ? strlen(f) : 0, f ? f : "");
+						 NOCATGETS("currentFile %d %s"),
+						 f ? strlen(f) : 0, f ? f : "");
 			workshop_send_message(buffer);
 		} else if (strcmp(cmd, NOCATGETS("getCursorRow")) == 0) {
 			int row = workshop_test_getcursorrow();
 			char buffer[2*MAXPATHLEN];
 			vim_snprintf(buffer, sizeof(buffer),
-					NOCATGETS("cursorRow %d"), row);
+						 NOCATGETS("cursorRow %d"), row);
 			workshop_send_message(buffer);
 		} else if (strcmp(cmd, NOCATGETS("getCursorCol")) == 0) {
 			int col = workshop_test_getcursorcol();
 			char buffer[2*MAXPATHLEN];
 			vim_snprintf(buffer, sizeof(buffer),
-					NOCATGETS("cursorCol %d"), col);
+						 NOCATGETS("cursorCol %d"), col);
 			workshop_send_message(buffer);
 		} else if (strcmp(cmd, NOCATGETS("getCursorRowText")) == 0) {
 			char *t = workshop_test_getcursorrowtext();
 			char buffer[2*MAXPATHLEN];
 			vim_snprintf(buffer, sizeof(buffer),
-					NOCATGETS("cursorRowText %d %s"),
-				t ? strlen(t) : 0, t ? t : "");
+						 NOCATGETS("cursorRowText %d %s"),
+						 t ? strlen(t) : 0, t ? t : "");
 			workshop_send_message(buffer);
 		} else if (strcmp(cmd, NOCATGETS("getSelectedText")) == 0) {
 			char *t = workshop_test_getselectedtext();
 			char buffer[2*MAXPATHLEN];
 			vim_snprintf(buffer, sizeof(buffer),
-					NOCATGETS("selectedText %d %s"),
-				t ? strlen(t) : 0, t ? t : "");
+						 NOCATGETS("selectedText %d %s"),
+						 t ? strlen(t) : 0, t ? t : "");
 			workshop_send_message(buffer);
 #endif
 		}
@@ -354,16 +354,16 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 'm':			/* Menu, minimize, maximize */
 		if (cmd[1] == 'e' && cmd[4] == 'B' &&
-		    strncmp(cmd, NOCATGETS("menuBegin "), 10) == 0) {
+				strncmp(cmd, NOCATGETS("menuBegin "), 10) == 0) {
 			workshop_menu_begin(&cmd[10]);
 		} else if (cmd[1] == 'e' && cmd[4] == 'I' &&
-		    strncmp(cmd, NOCATGETS("menuItem "), 9) == 0) {
+				   strncmp(cmd, NOCATGETS("menuItem "), 9) == 0) {
 			process_menuItem(cmd);
 		} else if (cmd[1] == 'e' && cmd[4] == 'E' &&
-		    strcmp(cmd, NOCATGETS("menuEnd")) == 0) {
+				   strcmp(cmd, NOCATGETS("menuEnd")) == 0) {
 			workshop_menu_end();
 		} else if (cmd[1] == 'a' &&
-		    strcmp(cmd, NOCATGETS("maximize")) == 0) {
+				   strcmp(cmd, NOCATGETS("maximize")) == 0) {
 			workshop_maximize();
 		} else if (strcmp(cmd, NOCATGETS("minimize")) == 0) {
 			workshop_minimize();
@@ -373,7 +373,7 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 'o':
 		if (cmd[1] == 'p' &&
-		    strcmp(cmd, NOCATGETS("option"))) {
+				strcmp(cmd, NOCATGETS("option"))) {
 			char *name;
 			char *value;
 
@@ -421,7 +421,7 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 'r':
 		if (cmd[1] == 'e' &&
-		    strncmp(cmd, NOCATGETS("reloadFile "), 11) == 0) {
+				strncmp(cmd, NOCATGETS("reloadFile "), 11) == 0) {
 			char *file;
 			int line;
 
@@ -434,7 +434,7 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 's':
 		if (cmd[1] == 'e' && cmd[2] == 't' &&
-		    strncmp(cmd, NOCATGETS("setMark "), 8) == 0) {
+				strncmp(cmd, NOCATGETS("setMark "), 8) == 0) {
 			char *file;
 			int line;
 			int markId;
@@ -446,19 +446,19 @@ messageFromEserve(XtPointer clientData UNUSED,
 			type = atoi(strtok(NULL, " "));
 			workshop_set_mark(file, line, markId, type);
 		} else if (cmd[1] == 'h' &&
-		    strncmp(cmd, NOCATGETS("showFile "), 9) == 0) {
+				   strncmp(cmd, NOCATGETS("showFile "), 9) == 0) {
 			workshop_show_file(&cmd[9]);
 		} else if (cmd[1] == 'u' &&
-		    strncmp(cmd, NOCATGETS("subMenu "), 8) == 0) {
+				   strncmp(cmd, NOCATGETS("subMenu "), 8) == 0) {
 			char *label;
 
 			label  = strtok(&cmd[8], NOCATGETS("\001"));
 			workshop_submenu_begin(label);
 		} else if (cmd[1] == 'u' &&
-		    strcmp(cmd, NOCATGETS("subMenuEnd")) == 0) {
+				   strcmp(cmd, NOCATGETS("subMenuEnd")) == 0) {
 			workshop_submenu_end();
 		} else if (cmd[1] == 'e' && cmd[2] == 'n' &&
-		    strncmp(cmd, NOCATGETS("sensitivity "), 12) == 0) {
+				   strncmp(cmd, NOCATGETS("sensitivity "), 12) == 0) {
 			int num;
 			char *bracket;
 			char *table;
@@ -467,13 +467,13 @@ messageFromEserve(XtPointer clientData UNUSED,
 			bracket = strtok(NULL, " ");
 			if (*bracket != '[') {
 				fprintf(stderr, NOCATGETS("Parsing "
-				    "error for sensitivity\n"));
+										  "error for sensitivity\n"));
 			} else {
 				table = strtok(NULL, NOCATGETS("]"));
 				workshop_sensitivity(num, table);
 			}
 		} else if (cmd[1] == 'e' && cmd[2] == 'n' && cmd[3] == 'd' &&
-			   strncmp(cmd, NOCATGETS("sendVerb "), 9) == 0) {
+				   strncmp(cmd, NOCATGETS("sendVerb "), 9) == 0) {
 			/* Send the given verb back (used for the
 			 * debug.lineno callback (such that other tools
 			 * can obtain the position coordinates or the
@@ -483,7 +483,7 @@ messageFromEserve(XtPointer clientData UNUSED,
 			verb = strtok(&cmd[9], " ");
 			workshop_perform_verb(verb, NULL);
 		} else if (cmd[1] == 'a' &&
-		    strncmp(cmd, NOCATGETS("saveFile "), 9) == 0) {
+				   strncmp(cmd, NOCATGETS("saveFile "), 9) == 0) {
 			workshop_save_file(&cmd[9]);
 #ifdef NOHANDS_SUPPORT_FUNCTIONS
 		} else if (strncmp(cmd, NOCATGETS("saveSensitivity "), 16) == 0) {
@@ -498,13 +498,13 @@ messageFromEserve(XtPointer clientData UNUSED,
 
 	case 't':			/* Toolbar */
 		if (cmd[8] == 'e' &&
-		    strncmp(cmd, NOCATGETS("toolbarBegin"), 12) == 0) {
+				strncmp(cmd, NOCATGETS("toolbarBegin"), 12) == 0) {
 			workshop_toolbar_begin();
 		} else if (cmd[8] == 'u' &&
-		    strncmp(cmd, NOCATGETS("toolbarButton"), 13) == 0) {
+				   strncmp(cmd, NOCATGETS("toolbarButton"), 13) == 0) {
 			process_toolbarButton(cmd);
 		} else if (cmd[7] == 'E' &&
-		    strcmp(cmd, NOCATGETS("toolbarEnd")) == 0) {
+				   strcmp(cmd, NOCATGETS("toolbarEnd")) == 0) {
 			workshop_toolbar_end();
 		}
 		HANDLE_ERRORS(cmd);
@@ -566,7 +566,7 @@ process_toolbarButton(
 		senseVerb = NULL;
 	}
 	workshop_toolbar_button(label, verb, senseVerb, filepos, help,
-				sense, file, left);
+							sense, file, left);
 }
 
 
@@ -587,7 +587,7 @@ unrecognised_message(
  *    x.xpm   : largest icon
  *    x1.xpm  : smaller icon
  *    x2.xpm  : smallest icon */
-	void
+void
 adjust_sign_name(char *filename)
 {
 	char *s;
@@ -711,7 +711,7 @@ void	workshop_connect(XtAppContext context)
 	 * when there is input on the editor connection socket
 	 */
 	inputHandler = XtAppAddInput(context, sd, (XtPointer) XtInputReadMask,
-				     messageFromEserve, NULL);
+								 messageFromEserve, NULL);
 #ifdef DEBUG
 	if ((file = getenv(NOCATGETS("SPRO_PLUGIN_DEBUG"))) != NULL) {
 		char buf[BUFSIZ];
@@ -726,9 +726,9 @@ void	workshop_connect(XtAppContext context)
 #endif
 
 	vim_snprintf(buf, sizeof(buf), NOCATGETS("connected %s %s %s\n"),
-		workshop_get_editor_name(),
-		PROTOCOL_VERSION,
-		workshop_get_editor_version());
+				 workshop_get_editor_name(),
+				 PROTOCOL_VERSION,
+				 workshop_get_editor_version());
 	dummy = write(sd, buf, strlen(buf));
 
 	vim_snprintf(buf, sizeof(buf), NOCATGETS("ack 1\n"));
@@ -762,8 +762,8 @@ isWindowMapped(Display *display, Window win)
 {
 	XWindowAttributes winAttrs;
 	XGetWindowAttributes(display,
-			     win,
-			     &winAttrs);
+						 win,
+						 &winAttrs);
 	if (winAttrs.map_state == IsViewable) {
 		return(True);
 	} else {
@@ -804,8 +804,8 @@ widgetIsIconified(
 	wm_state = XmInternAtom(XtDisplay(w), NOCATGETS("WM_STATE"), False);
 	if (XtWindow(w) != 0) {			/* only check if window exists! */
 		XGetWindowProperty(XtDisplay(w), XtWindow(w), wm_state, 0L, 2L,
-		    False, AnyPropertyType, &act_type, &act_fmt, &nitems_ret,
-		    &bytes_after, (u_char **) &property);
+						   False, AnyPropertyType, &act_type, &act_fmt, &nitems_ret,
+						   &bytes_after, (u_char **) &property);
 		if (nitems_ret == 2 && property[0] == IconicState) {
 			return True;
 		}
@@ -819,24 +819,24 @@ void
 workshop_minimize_shell(Widget shell)
 {
 	if (shell != NULL &&
-	    XtIsObject(shell) &&
-	    XtIsRealized(shell) == True) {
+			XtIsObject(shell) &&
+			XtIsRealized(shell) == True) {
 		if (isMapped(shell) == True) {
 			XIconifyWindow(XtDisplay(shell), XtWindow(shell),
-			       XScreenNumberOfScreen(XtScreen(shell)));
+						   XScreenNumberOfScreen(XtScreen(shell)));
 		}
 		XtVaSetValues(shell,
-			      XmNiconic, True,
-			      NULL);
+					  XmNiconic, True,
+					  NULL);
 	}
 }
 
 void workshop_maximize_shell(Widget shell)
 {
 	if (shell != NULL &&
-	    XtIsRealized(shell) == True &&
-	    widgetIsIconified(shell) == True &&
-	    isMapped(shell) == False) {
+			XtIsRealized(shell) == True &&
+			widgetIsIconified(shell) == True &&
+			isMapped(shell) == False) {
 		XtMapWidget(shell);
 		/* This used to be
 		     XtPopdown(shell);
@@ -975,7 +975,7 @@ void workshop_file_closed_lineno(char *filename, int lineno)
 {
 	char buffer[2*MAXPATHLEN];
 	vim_snprintf(buffer, sizeof(buffer),
-			NOCATGETS("deletedFile %s %d\n"), filename, lineno);
+				 NOCATGETS("deletedFile %s %d\n"), filename, lineno);
 	dummy = write(sd, buffer, strlen(buffer));
 }
 
@@ -983,7 +983,7 @@ void workshop_file_opened(char *filename, int readOnly)
 {
 	char buffer[2*MAXPATHLEN];
 	vim_snprintf(buffer, sizeof(buffer),
-			NOCATGETS("loadedFile %s %d\n"), filename, readOnly);
+				 NOCATGETS("loadedFile %s %d\n"), filename, readOnly);
 	dummy = write(sd, buffer, strlen(buffer));
 }
 
@@ -992,7 +992,7 @@ void workshop_file_saved(char *filename)
 {
 	char buffer[2*MAXPATHLEN];
 	vim_snprintf(buffer, sizeof(buffer),
-			NOCATGETS("savedFile %s\n"), filename);
+				 NOCATGETS("savedFile %s\n"), filename);
 	dummy = write(sd, buffer, strlen(buffer));
 
 	/* Let editor report any moved marks that the eserve client
@@ -1004,11 +1004,10 @@ void workshop_frame_moved(int new_x, int new_y, int new_w, int new_h)
 {
 	char buffer[200];
 
-	if (sd >= 0)
-	{
+	if (sd >= 0) {
 		vim_snprintf(buffer, sizeof(buffer),
-				NOCATGETS("frameAt %d %d %d %d\n"),
-				new_x, new_y, new_w, new_h);
+					 NOCATGETS("frameAt %d %d %d %d\n"),
+					 new_x, new_y, new_w, new_h);
 		dummy = write(sd, buffer, strlen(buffer));
 	}
 }
@@ -1031,20 +1030,20 @@ void workshop_perform_verb(char *verb, void *clientData)
 	char *selection;
 
 	char buf[2*MAXPATHLEN];
-/* Later: needsFilePos indicates whether or not we need to fetch all this
- * info for this verb... for now, however, it looks as if
- * eserve parsing routines depend on it always being present */
+	/* Later: needsFilePos indicates whether or not we need to fetch all this
+	 * info for this verb... for now, however, it looks as if
+	 * eserve parsing routines depend on it always being present */
 
 	if (workshop_get_positions(clientData,
-				   &filename,
-				   &curLine,
-				   &curCol,
-				   &selStartLine,
-				   &selStartCol,
-				   &selEndLine,
-				   &selEndCol,
-				   &selLength,
-				   &selection)) {
+							   &filename,
+							   &curLine,
+							   &curCol,
+							   &selStartLine,
+							   &selStartCol,
+							   &selEndLine,
+							   &selEndCol,
+							   &selLength,
+							   &selection)) {
 		if (selection == NULL) {
 			selection = NOCATGETS("");
 		}
@@ -1055,20 +1054,20 @@ void workshop_perform_verb(char *verb, void *clientData)
 		   vi and emacs as well). */
 		if (save_files) {
 			if (!strcmp(verb, "build.build") || !strcmp(verb, "build.build-file") ||
-			    !strcmp(verb, "debug.fix") || !strcmp(verb, "debug.fix-all")) {
+					!strcmp(verb, "debug.fix") || !strcmp(verb, "debug.fix-all")) {
 				workshop_save_files();
 			}
 		}
 
 		vim_snprintf(buf, sizeof(buf),
-			NOCATGETS("toolVerb %s %s %d,%d %d,%d %d,%d %d %s\n"),
-			verb,
-			filename,
-			curLine, curCol,
-			selStartLine, selStartCol,
-			selEndLine, selEndCol,
-			selLength,
-			selection);
+					 NOCATGETS("toolVerb %s %s %d,%d %d,%d %d,%d %d %s\n"),
+					 verb,
+					 filename,
+					 curLine, curCol,
+					 selStartLine, selStartCol,
+					 selEndLine, selEndCol,
+					 selLength,
+					 selection);
 		dummy = write(sd, buf, strlen(buf));
 		if (*selection) {
 			free(selection);

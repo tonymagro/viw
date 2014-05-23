@@ -24,12 +24,12 @@ EXTERN_PROXY_FILE( if_ole )
 
 PROXYFILE_LIST_START
 /* Start of list */
-  REFERENCE_PROXY_FILE( if_ole ),
-/* End of list */
-PROXYFILE_LIST_END
+REFERENCE_PROXY_FILE( if_ole ),
+					  /* End of list */
+					  PROXYFILE_LIST_END
 
 
-DLLDATA_ROUTINES( aProxyFileList, GET_DLL_CLSID )
+					  DLLDATA_ROUTINES( aProxyFileList, GET_DLL_CLSID )
 
 #ifdef __cplusplus
 }  /*extern "C" */

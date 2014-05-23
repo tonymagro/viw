@@ -86,8 +86,7 @@ wsdebug_log_init(
 	char		*file;		/* possible ws_debug output file */
 	char		*cp;		/* ws_dlevel pointer */
 
-	if (log_var && (file = getenv(log_var)) != NULL)
-	{
+	if (log_var && (file = getenv(log_var)) != NULL) {
 		char buf[BUFSIZ];
 
 		vim_snprintf(buf, sizeof(buf), "date > %s", file);
@@ -167,12 +166,12 @@ errorHandler(
 
 	sprintf(buf, "%d", err->request_code);
 	XGetErrorDatabaseText(dpy,
-	    "XRequest", buf, "Unknown", msg, sizeof(msg));
+						  "XRequest", buf, "Unknown", msg, sizeof(msg));
 	wsdebug("\tMajor opcode of failed request: %d (%s)\n",
-	    err->request_code, msg);
+			err->request_code, msg);
 	if (err->request_code > 128) {
 		wsdebug("\tMinor opcode of failed request: %d\n",
-		    err->minor_code);
+				err->minor_code);
 	}
 
 	return 0;

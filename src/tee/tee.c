@@ -33,7 +33,7 @@
 void usage(void)
 {
 	fprintf(stderr,
-"tee usage:\n\
+			"tee usage:\n\
 \ttee [-a] file ... file_n\n\
 \n\
 \t-a\tappend to files instead of truncating\n\
@@ -57,8 +57,7 @@ myfread(char *buf, int elsize /*ignored*/, int max, FILE *fp)
 	int	c;
 	int	n = 0;
 
-	while ((n < max) && ((c = getchar()) != EOF))
-	{
+	while ((n < max) && ((c = getchar()) != EOF)) {
 		*(buf++) = c;
 		n++;
 		if (c == '\n' || c == '\r')
@@ -81,21 +80,20 @@ main(int argc, char *argv[])
 	int	n;
 	extern int	optind;
 
-	while ((opt = getopt(argc, argv, "a")) != EOF)
-	{
-		switch (opt)
-		{
-			case 'a':	append++;
-					break;
-			default:	usage();
-					exit(2);
+	while ((opt = getopt(argc, argv, "a")) != EOF) {
+		switch (opt) {
+		case 'a':
+			append++;
+			break;
+		default:
+			usage();
+			exit(2);
 		}
 	}
 
 	numfiles = argc - optind;
 
-	if (numfiles == 0)
-	{
+	if (numfiles == 0) {
 		fprintf(stderr, "doesn't make much sense using tee without any file name arguments...\n");
 		usage();
 		exit(2);
@@ -104,22 +102,18 @@ main(int argc, char *argv[])
 	maxfiles = sysconf(_SC_OPEN_MAX);	/* or fill in 10 or so */
 	if (maxfiles < 0)
 		maxfiles = 10;
-	if (numfiles + 3 > maxfiles)	/* +3 accounts for stdin, out, err */
-	{
+	if (numfiles + 3 > maxfiles) {	/* +3 accounts for stdin, out, err */
 		fprintf(stderr, "Sorry, there is a limit of max %d files.\n", maxfiles - 3);
 		exit(1);
 	}
 	filepointers = calloc(numfiles, sizeof(FILE *));
-	if (filepointers == NULL)
-	{
+	if (filepointers == NULL) {
 		fprintf(stderr, "Error allocating memory for %d files\n", numfiles);
 		exit(1);
 	}
-	for (i = 0; i < numfiles; i++)
-	{
+	for (i = 0; i < numfiles; i++) {
 		filepointers[i] = fopen(argv[i+optind], append ? "ab" : "wb");
-		if (filepointers[i] == NULL)
-		{
+		if (filepointers[i] == NULL) {
 			fprintf(stderr, "Can't open \"%s\"\n", argv[i+optind]);
 			exit(1);
 		}
@@ -128,23 +122,19 @@ main(int argc, char *argv[])
 	fflush(stdout);	/* needed for _fsetmode(stdout) */
 	_fsetmode(stdout, "b");
 
-	while ((n = myfread(buf, sizeof(char), sizeof(buf), stdin)) > 0)
-	{
+	while ((n = myfread(buf, sizeof(char), sizeof(buf), stdin)) > 0) {
 		fwrite(buf, sizeof(char), n, stdout);
 		fflush(stdout);
-		for (i = 0; i < numfiles; i++)
-		{
+		for (i = 0; i < numfiles; i++) {
 			if (filepointers[i] &&
-			     fwrite(buf, sizeof(char), n, filepointers[i]) != n)
-			{
+					fwrite(buf, sizeof(char), n, filepointers[i]) != n) {
 				fprintf(stderr, "Error writing to file \"%s\"\n", argv[i+optind]);
 				fclose(filepointers[i]);
 				filepointers[i] = NULL;
 			}
 		}
 	}
-	for (i = 0; i < numfiles; i++)
-	{
+	for (i = 0; i < numfiles; i++) {
 		if (filepointers[i])
 			fclose(filepointers[i]);
 	}

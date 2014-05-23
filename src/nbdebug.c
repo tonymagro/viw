@@ -146,12 +146,12 @@ errorHandler(
 
 	sprintf(buf, "%d", err->request_code);
 	XGetErrorDatabaseText(dpy,
-	    "XRequest", buf, "Unknown", msg, sizeof(msg));
+						  "XRequest", buf, "Unknown", msg, sizeof(msg));
 	nbdbg("\tMajor opcode of failed request: %d (%s)\n",
-	    err->request_code, msg);
+		  err->request_code, msg);
 	if (err->request_code > 128) {
 		nbdbg("\tMinor opcode of failed request: %d\n",
-		    err->minor_code);
+			  err->minor_code);
 	}
 
 	return 0;

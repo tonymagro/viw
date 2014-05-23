@@ -24,43 +24,43 @@
 
 #define NIL(type)	((type)0)
 
-    static int
+static int
 sfvimwrite(f, buf, n, disc)
-    Sfio_t	    *f;		/* stream involved */
-    char	    *buf;	/* buffer to read from */
-    int		    n;		/* number of bytes to write */
-    Sfdisc_t	    *disc;	/* discipline */
+Sfio_t	    *f;		/* stream involved */
+char	    *buf;	/* buffer to read from */
+int		    n;		/* number of bytes to write */
+Sfdisc_t	    *disc;	/* discipline */
 {
-    char_u *str;
+	char_u *str;
 
-    str = vim_strnsave((char_u *)buf, n);
-    if (str == NULL)
-	return 0;
-    msg_split((char *)str);
-    vim_free(str);
+	str = vim_strnsave((char_u *)buf, n);
+	if (str == NULL)
+		return 0;
+	msg_split((char *)str);
+	vim_free(str);
 
-    return n;
+	return n;
 }
 
 /*
  * sfdcnewnvi --
  *  Create Vim discipline
  */
-    Sfdisc_t *
+Sfdisc_t *
 sfdcnewvim()
 {
-    Sfdisc_t	*disc;
+	Sfdisc_t	*disc;
 
-    disc = (Sfdisc_t *)alloc((unsigned)sizeof(Sfdisc_t));
-    if (disc == NULL)
-	return NULL;
+	disc = (Sfdisc_t *)alloc((unsigned)sizeof(Sfdisc_t));
+	if (disc == NULL)
+		return NULL;
 
-    disc->readf = (Sfread_f)NULL;
-    disc->writef = sfvimwrite;
-    disc->seekf = (Sfseek_f)NULL;
-    disc->exceptf = (Sfexcept_f)NULL;
+	disc->readf = (Sfread_f)NULL;
+	disc->writef = sfvimwrite;
+	disc->seekf = (Sfseek_f)NULL;
+	disc->exceptf = (Sfexcept_f)NULL;
 
-    return disc;
+	return disc;
 }
 
 #endif /* USE_SFIO */

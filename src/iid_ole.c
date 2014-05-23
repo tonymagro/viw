@@ -13,15 +13,15 @@
 */
 //@@MIDL_FILE_HEADING(  )
 #ifdef __cplusplus
-extern "C"{
+extern "C" {
 #endif
 
 #ifdef __MINGW32__
 # include <w32api.h>
 
 # if __W32API_MAJOR_VERSION == 3 && __W32API_MINOR_VERSION < 10
-   /* This define is missing from older MingW versions of w32api, even though
-    * IID is defined. */
+/* This define is missing from older MingW versions of w32api, even though
+ * IID is defined. */
 #  define __IID_DEFINED__
 # endif
 #endif
@@ -29,12 +29,11 @@ extern "C"{
 #ifndef __IID_DEFINED__
 # define __IID_DEFINED__
 
-typedef struct _IID
-{
-    unsigned long x;
-    unsigned short s1;
-    unsigned short s2;
-    unsigned char  c[8];
+typedef struct _IID {
+	unsigned long x;
+	unsigned short s1;
+	unsigned short s2;
+	unsigned char  c[8];
 } IID;
 
 #endif

@@ -13,39 +13,33 @@
 
 #define LINELEN 200
 
-	int
+int
 main(argc, argv)
-	int		argc;
-	char	**argv;
+int		argc;
+char	**argv;
 {
 	char	line[LINELEN];
 	char	*p1, *p2;
 	char	*p;
 	FILE	*fd;
 
-	if (argc <= 1)
-	{
+	if (argc <= 1) {
 		fprintf(stderr, "Usage: doctags docfile ... >tags\n");
 		exit(1);
 	}
 	printf("help-tags\ttags\t1\n");
-	while (--argc > 0)
-	{
+	while (--argc > 0) {
 		++argv;
 		fd = fopen(argv[0], "r");
-		if (fd == NULL)
-		{
+		if (fd == NULL) {
 			fprintf(stderr, "Unable to open %s for reading\n", argv[0]);
 			continue;
 		}
-		while (fgets(line, LINELEN, fd) != NULL)
-		{
+		while (fgets(line, LINELEN, fd) != NULL) {
 			p1 = strchr(line, '*');				/* find first '*' */
-			while (p1 != NULL)
-			{
+			while (p1 != NULL) {
 				p2 = strchr(p1 + 1, '*');		/* find second '*' */
-				if (p2 != NULL && p2 > p1 + 1)	/* skip "*" and "**" */
-				{
+				if (p2 != NULL && p2 > p1 + 1) {	/* skip "*" and "**" */
 					for (p = p1 + 1; p < p2; ++p)
 						if (*p == ' ' || *p == '\t' || *p == '|')
 							break;
@@ -56,14 +50,12 @@ main(argc, argv)
 					 */
 					if (p == p2
 							&& (p1 == line || p1[-1] == ' ' || p1[-1] == '\t')
-								&& (strchr(" \t\n\r", p[1]) != NULL
-									|| p[1] == '\0'))
-					{
+							&& (strchr(" \t\n\r", p[1]) != NULL
+								|| p[1] == '\0')) {
 						*p2 = '\0';
 						++p1;
 						printf("%s\t%s\t/*", p1, argv[0]);
-						while (*p1)
-						{
+						while (*p1) {
 							/* insert backslash before '\\' and '/' */
 							if (*p1 == '\\' || *p1 == '/')
 								putchar('\\');
